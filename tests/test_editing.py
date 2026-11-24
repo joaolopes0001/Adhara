@@ -1022,6 +1022,31 @@ class FailureTests(Fixture, unittest.TestCase):
         self.assertTrue(squatter[0].exists(), 'a entry that may not be ours was removed')
         self.assertEqual(self.doc.read_bytes(), b'# Guide\n\nText.\n')
 
+    def test_the_temporary_is_held_open_through_the_rename(self):
+        """A held inode cannot be freed, so its number cannot go to a file created later (ext4 can reuse it at once)."""
+        def open_identities():
+            found = set()
+            for entry in os.listdir('/proc/self/fd'):
+                try:
+                    opened = os.stat(f'/proc/self/fd/{entry}')
+                except OSError:
+                    continue
+                found.add((opened.st_dev, opened.st_ino))
+            return found
+        real_replace = os.replace
+        held = []
+        def replace_checking(source, target, *, src_dir_fd, dst_dir_fd):
+            info = os.stat(source, dir_fd=src_dir_fd)
+            held.append((info.st_dev, info.st_ino) in open_identities())
+            return real_replace(source, target, src_dir_fd=src_dir_fd, dst_dir_fd=dst_dir_fd)
+        with patch('editing.os.replace', side_effect=replace_checking):
+            self.save('# Changed\n')
+        self.assertEqual(held, [True])
+        now = os.stat(self.doc)
+        self.assertNotIn((now.st_dev, now.st_ino), open_identities(), 'the descriptor that held the temporary was not closed')
+        self.assertEqual(self.doc.read_bytes(), b'# Changed\n')
+        self.assertEqual(leftovers(self.base), [])
+
     def test_temporary_removed_by_another_program_before_the_rename_is_unconfirmed(self):
         """No injected error: a cleaner removes `.aae-edit-*` right before the rename."""
         import pathlib

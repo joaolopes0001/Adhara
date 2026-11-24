@@ -545,7 +545,7 @@ def save(model, root, path, base_sha256, text, state_dirs):
     _check_text(base_sha256, text)
     identities = _guarded(path, state_dirs)
     parent_fd, parent_id = _pin(Path(path).parts[1:-1], identities)
-    temporary, replaced = None, False
+    temporary, replaced, pin = None, False, None
     try:
         _lock(parent_fd)  # 12a
         data, info, attributes = _read(parent_fd, name, identities, attributes=True)
@@ -572,7 +572,7 @@ def save(model, root, path, base_sha256, text, state_dirs):
         except OSError as exc:
             raise _failed(exc) from None
         temporary = candidate  # From here on it is removed on any refusal, unless the rename happened.
-        written = _fill(fd, new, info, attributes)  # 19
+        written, pin = _fill(fd, new, info, attributes)  # 19
         _still_the_same(parent_fd, name, info, previous)  # 20
         folder = Path(path).parent  # 21: the pinned folder is still the one at this path, with no link
         try:
@@ -613,12 +613,17 @@ def save(model, root, path, base_sha256, text, state_dirs):
                 'previousSha256': previous, 'unchanged': False, 'durable': durable}
     except BaseException as exc:
         if temporary is not None and not replaced:
+            if pin is not None:  # Before the unlink: on NFS an open file is renamed to `.nfs*` instead of removed.
+                _close(pin)
+                pin = None
             left = _remove(parent_fd, temporary)
             if left and isinstance(exc, Refusal):
                 raise Refusal(exc.code, say('{refusal} The temporary file {temporary} was left in the folder of the document, '
                                             'with the new text; it can be deleted.', refusal=of(exc), temporary=left)) from None
         raise
     finally:
+        if pin is not None:
+            _close(pin)
         _close(parent_fd)  # Also releases the flock.
 
 
@@ -636,7 +641,12 @@ def _remove(parent_fd, temporary):
 def _fill(fd, data, info, attributes):
     """Step 19: write, then give the temporary the group, attributes and mode of the original, check, fsync.
 
-    Returns the identity of the temporary; the descriptor is closed.
+    Returns the identity of the temporary and a duplicate descriptor of it, which the caller
+    closes at the end of the save; `fd` itself is closed. While the duplicate is open a local
+    filesystem keeps the inode allocated, so a file created later cannot get its number (ext4
+    can reuse a freed one at once), and the checks of steps 22 and 22a compare against the
+    temporary written here. A network filesystem may still free it when another machine
+    removes the name.
     """
     mode = stat.S_IMODE(info.st_mode) & KEPT_MODE
     try:
@@ -676,14 +686,19 @@ def _fill(fd, data, info, attributes):
             os.fsync(fd)
         except OSError as exc:
             raise _failed(exc) from None
+        try:
+            pin = os.dup(fd)
+        except OSError as exc:
+            raise _failed(exc) from None
     except BaseException:
         _close(fd)
         raise
     try:
         os.close(fd)
     except OSError as exc:
+        _close(pin)
         raise _failed(exc) from None
-    return kept.st_dev, kept.st_ino
+    return (kept.st_dev, kept.st_ino), pin
 
 
 def _identity(path):

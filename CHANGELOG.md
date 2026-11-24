@@ -2,6 +2,10 @@
 
 As mudanças visíveis do Agent Architecture Explorer, uma entrada por versão, com a data. O que ainda não foi lançado entra numa seção **Não lançado**, no topo, que vira a entrada da próxima versão.
 
+## Não lançado
+
+- **Edição:** num sistema de arquivos que reaproveita na hora o número de um inode liberado, como o ext4, um temporário da edição apagado por outro programa e recriado com o mesmo nome antes da troca passava pelo temporário da gravação. A resposta dizia que nada tinha sido salvo, e a limpeza apagava o arquivo do outro programa. A gravação agora mantém o temporário aberto até o fim: a resposta é que o resultado não pôde ser confirmado, e o arquivo do outro programa fica.
+
 ## 1.0.0 — primeira versão pública
 
 2026-11-24
