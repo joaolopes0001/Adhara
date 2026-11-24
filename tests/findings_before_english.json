@@ -1,0 +1,1544 @@
+{
+ "findings": [
+  {
+   "config": "normal",
+   "finding": {
+    "code": "analysis-partial",
+    "id": "36efb3cd5e8aa37d",
+    "message": "Inventário ou análise parcial: ausência de achados ou de caminhos não é conclusiva.",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "unreadable",
+    "id": "f8b4baa179b45da9",
+    "message": "Não foi possível analisar: 'utf-8' codec can't decode byte 0xe9 in position 3: invalid continuation byte",
+    "path": "docs/latin.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "broken",
+    "form": "word",
+    "id": "341f0f482a1bfaff",
+    "line": 2,
+    "message": "Destino não encontrado: wiki-falta",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "wiki",
+    "target": "wiki-falta"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "broken",
+    "form": "path",
+    "id": "8cc63c9e0c956582",
+    "line": 2,
+    "message": "Destino não encontrado: docs/falta.md",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "markdown",
+    "target": "docs/falta.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "ancestor": "..",
+    "code": "outside-root",
+    "form": "path",
+    "id": "e61af88e9481eda6",
+    "legacyId": "55d58273eb8ce22a",
+    "levels": 1,
+    "line": 4,
+    "message": "A referência compartilhado/acima.md não resolve dentro do diretório aberto, mas o destino existe no mesmo repositório (o de base, com .git), fora do diretório aberto: no ancestral base (.., 1 nível acima do diretório aberto), em ../compartilhado/acima.md. Se este diretório é usado sozinho, a referência está quebrada; se é usado dentro do repositório, abra a raiz dele.",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "path",
+    "target": "compartilhado/acima.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "manifest",
+    "id": "51d91845f4b3ad7b",
+    "message": "Manifesto inválido: Expecting value: line 1 column 14 (char 13)",
+    "path": "cortado/agent-architecture.json",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "absent": "relation",
+    "code": "manifest-mismatch",
+    "from": "pacote/a.md",
+    "id": "bc29a5a784263319",
+    "line": 1,
+    "manifest": "pacote/agent-architecture.json",
+    "message": "Link sem relação no manifesto agent-architecture.json: b.md. Com linkedRelationships, cada link explícito entre dois objetos do manifesto é uma relação dele.",
+    "path": "pacote/a.md",
+    "severity": "warning",
+    "syntax": "markdown",
+    "target": "b.md",
+    "to": "pacote/b.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "absent": "link",
+    "code": "manifest-mismatch",
+    "from": "pacote/b.md",
+    "id": "78644bbc6b95a734",
+    "line": 1,
+    "manifest": "pacote/agent-architecture.json",
+    "message": "Relação do manifesto sem link no arquivo de origem: b.md → a.md. Com linkedRelationships, cada relação tem um link explícito do arquivo de origem para o destino, fora de bloco de código.",
+    "path": "pacote/agent-architecture.json",
+    "severity": "warning",
+    "target": "b.md → a.md",
+    "to": "pacote/a.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "manifest",
+    "id": "2afbeb8e2b50c17e",
+    "message": "Manifesto inválido: objects e relationships devem ser listas.",
+    "path": "ruim/agent-architecture.json",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "manifest",
+    "id": "5fabdc8c33d2ec88",
+    "message": "Manifesto inválido: Relacionamento com type inválido: deve ser texto.",
+    "path": "tipo/agent-architecture.json",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "basename-resolved",
+    "id": "ab9acddcf6d95d93",
+    "line": 4,
+    "message": "Referência resolvida pelo único candidato sob a pasta da skill de origem (homônimos fora dela não contam); escreva o caminho a partir do arquivo para não depender da busca por nome.",
+    "path": ".claude/skills/uma/SKILL.md",
+    "resolvedBy": "skill-basename",
+    "resolvedTo": ".claude/skills/uma/fundo/apoio.md",
+    "severity": "info",
+    "target": "apoio.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "unresolved-name",
+    "form": "name",
+    "id": "f7896dbf41b6cb73",
+    "line": 2,
+    "message": "Nome citado sem diretório não corresponde a nenhum arquivo do inventário: fantasma.md. Pode ser artefato de execução, exemplo ou marcador; não é tratado como caminho quebrado.",
+    "path": "AGENTS.md",
+    "severity": "info",
+    "syntax": "path",
+    "target": "fantasma.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "candidates": [
+     "x/comum.md",
+     "y/comum.md"
+    ],
+    "candidatesTotal": 2,
+    "code": "ambiguous",
+    "form": "name",
+    "id": "8690ded01f50d331",
+    "line": 3,
+    "message": "Referência ambígua: comum.md (2 candidatos no inventário; nenhum foi escolhido).",
+    "path": "AGENTS.md",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "comum.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "ff4475691a1911e7",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n0.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "a55a253c669ae9c4",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n1.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "f00a2d951d99eebc",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n10.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "1822d050f1fa0c3a",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n11.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "38531cba035ce777",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n2.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "728a319b137df628",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n3.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "5ce800c2d7151f49",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n4.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "623c2789babfaa8c",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n5.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "f0748e00f2b3b146",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n6.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "3ec528be7e70c585",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n7.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "57163070dd679b9e",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n8.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "4124e6b01ccfd5a0",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/mais/n9.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "8476dfcd6a209b5f",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n0.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "b36ca2b8161b1196",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n1.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "337a11f18c8c4d85",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n10.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "bf8a2d8710ce5e7e",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n11.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "588f95936b19be0f",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n2.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "e7980562e2f8e6c9",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n3.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "13f6a751835fd738",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n4.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "2213e2763e9a426c",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n5.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "d9342a1ecf9161de",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n6.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "c26c54e8b115adb4",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n7.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "4ed856ab14566755",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n8.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "8522d44258445c81",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/fundo/n9.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "d9fe9f9d34443c85",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n0.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "7039882913128684",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n1.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "c78b384f88b96d7c",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n10.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "8ee596be40ee282c",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n11.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "1259aaef4321d88b",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n2.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "921b2d8f84263b25",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n3.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "2c8d267a88c32b14",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n4.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "96cb1d08031358e9",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n5.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "38251ee16d84b4ee",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n6.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "e950cee0598686df",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n7.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "7b8959f7c32e253c",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n8.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "6c0234fb17860110",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "arquivo/outro/n9.txt",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "symlink",
+    "id": "0924b857adcbb645",
+    "message": "Link simbólico listado sem seguir seu destino.",
+    "path": "atalho.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "island",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "8fb78335f94dbde3",
+    "inbound": 1,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 1 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "ilha/i1.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "island",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "8726591d0a986802",
+    "inbound": 1,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 1 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "ilha/i2.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "3b717ccdc4f08dbb",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "solto.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "basename-resolved",
+    "id": "97c43ee9e8783cc0",
+    "line": 1,
+    "message": "Referência resolvida pelo único candidato no inventário; escreva o caminho completo para não depender da busca por nome.",
+    "path": "tipo/agent-architecture.json",
+    "resolvedBy": "basename",
+    "resolvedTo": "pacote/a.md",
+    "severity": "info",
+    "target": "a.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "96cb985d77a650bb",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "x/comum.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "664c576abe5bd24d",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "y/comum.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "broken",
+    "form": "name",
+    "id": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Destino não encontrado: sumiu.md",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo0"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "scope-unused-pattern",
+    "id": "079131e0e2a4929e",
+    "message": "Padrão de escopo sem efeito (runtimeWorkspace: nunca/): nenhuma referência absorvida e nenhum arquivo inventariado casou. Revise ou remova a declaração.",
+    "path": "agent-architecture.json",
+    "pattern": "nunca/",
+    "scopeKind": "runtimeWorkspace",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/escopo0"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "broken",
+    "form": "name",
+    "id": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Destino não encontrado: sumiu.md",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo1"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "manifest",
+    "id": "06d4380add8ae0ea",
+    "message": "Declaração de escopo inválida e ignorada: entries: o padrão /absoluto/x.md deve ser relativo à raiz, sem / inicial.",
+    "path": "agent-architecture.json",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/escopo1"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "broken",
+    "form": "name",
+    "id": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Destino não encontrado: sumiu.md",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo2"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "manifest",
+    "id": "06d4380add8ae0ea",
+    "message": "Declaração de escopo inválida e ignorada: localFiles: o padrão a/../b tem segmento vazio, \".\" ou \"..\".",
+    "path": "agent-architecture.json",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/escopo2"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "broken",
+    "form": "name",
+    "id": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Destino não encontrado: sumiu.md",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo3"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "manifest",
+    "id": "06d4380add8ae0ea",
+    "message": "Declaração de escopo inválida e ignorada: Campo desconhecido na declaração de escopo: 'a', 'b', 'c', 'd', 'e' (e mais 1).",
+    "path": "agent-architecture.json",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/escopo3"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "broken",
+    "form": "name",
+    "id": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Destino não encontrado: sumiu.md",
+    "path": "AGENTS.md",
+    "severity": "warning",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo4"
+  },
+  {
+   "config": "normal",
+   "finding": {
+    "code": "manifest",
+    "id": "06d4380add8ae0ea",
+    "message": "Declaração de escopo inválida e ignorada: Versão de escopo incompatível; use version: 1.",
+    "path": "agent-architecture.json",
+    "severity": "warning"
+   },
+   "root": "/aae-findings-before-english/escopo4"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "fa73cc79eb25c06a",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "AGENTS.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "0a411dc0a21dac56",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d0.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "afc23f6aa86cfd06",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d1.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "3424d926f761c78f",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d2.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "2a284d90b7eda34b",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d3.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "60e702ebe025f6c0",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d4.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "543efe3e4872c810",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d5.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "7c02ac97a6ad0890",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d6.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "e50418d6a75318ee",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "docs/d7.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "code": "limit",
+    "id": "09e2d4a4ae8d622b",
+    "message": "Arquivo listado, mas não analisado: limite de tamanho de texto.",
+    "path": "grande.md",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "c17c950c85fe12d1",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": ".claude/skills/uma/SKILL.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "island",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "bf532d7c08d375f1",
+    "inbound": 1,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 1 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": ".claude/skills/uma/fundo/apoio.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "f8386e26e95148e0",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d0.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "1e32ed0002a612e7",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d1.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "5b31f57b9a48729a",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d2.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "28c5773b86975000",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d3.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "20c8249cece8d1b8",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d4.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "1b0cadc5d3420e5c",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d5.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "06c2f50cfffc7801",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d6.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "e3633e4dd3565308",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/d7.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "4015391787803bd5",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "docs/latin.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "3e0d803d8635c9a4",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "grande.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "island",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "a30aeab492da8537",
+    "inbound": 3,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 3 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "pacote/a.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "bytes",
+   "finding": {
+    "class": "island",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "471563df850bb1cc",
+    "inbound": 2,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 2 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "pacote/b.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "files",
+   "finding": {
+    "code": "limit",
+    "id": "0f4fe507ee50958b",
+    "message": "Limite de inventário atingido em principal (10 elementos por raiz neste workspace): 1 pasta(s) lida(s) em parte e 6 não lida(s), com 71 elemento(s) fora do inventário. 4 arquivo(s) de entrada ou de skill (AGENTS.md, CLAUDE.md, SKILL.md) ficaram fora, como .claude/skills/uma/SKILL.md. O corte afeta os dois lados: pode faltar achado nessas pastas, e referências para dentro delas são conferidas só por existência. Abra um subdiretório para uma leitura completa.",
+    "path": ".",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "files",
+   "finding": {
+    "candidates": [
+     "x/comum.md",
+     "y/comum.md"
+    ],
+    "candidatesTotal": 2,
+    "code": "ambiguous",
+    "form": "name",
+    "id": "8690ded01f50d331",
+    "line": 3,
+    "message": "Referência ambígua: comum.md (2 candidatos, 2 além do inventário; nenhum foi escolhido).",
+    "path": "AGENTS.md",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "comum.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "limit",
+    "id": "0f4fe507ee50958b",
+    "message": "Limite de inventário atingido em principal (10 elementos por raiz neste workspace): 1 pasta(s) lida(s) em parte e 6 não lida(s), com no mínimo 71 elemento(s) fora do inventário. 4 arquivo(s) de entrada ou de skill (AGENTS.md, CLAUDE.md, SKILL.md) ficaram fora, como .claude/skills/uma/SKILL.md. O corte afeta os dois lados: pode faltar achado nessas pastas, e referências para dentro delas são conferidas só por existência. Abra um subdiretório para uma leitura completa.",
+    "path": ".",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "word",
+    "id": "c63b6d032096cee4",
+    "legacyId": "341f0f482a1bfaff",
+    "line": 2,
+    "message": "Ausência não verificável: wiki-falta. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "wiki",
+    "target": "wiki-falta"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "name",
+    "id": "f36eb9e7dfe2e9bd",
+    "legacyId": "f7896dbf41b6cb73",
+    "line": 2,
+    "message": "Ausência não verificável: fantasma.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "path",
+    "target": "fantasma.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "path",
+    "id": "fe4a52addd4482b8",
+    "legacyId": "8cc63c9e0c956582",
+    "line": 2,
+    "message": "Ausência não verificável: docs/falta.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "docs/falta.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "path",
+    "id": "edb89ff82994f4cb",
+    "legacyId": "55d58273eb8ce22a",
+    "line": 4,
+    "message": "Ausência não verificável: compartilhado/acima.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "path",
+    "target": "compartilhado/acima.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "name",
+    "id": "b963e467f9ac34f2",
+    "legacyId": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Ausência não verificável: sumiu.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo0"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "name",
+    "id": "b963e467f9ac34f2",
+    "legacyId": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Ausência não verificável: sumiu.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo1"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "name",
+    "id": "b963e467f9ac34f2",
+    "legacyId": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Ausência não verificável: sumiu.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo2"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "name",
+    "id": "b963e467f9ac34f2",
+    "legacyId": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Ausência não verificável: sumiu.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo3"
+  },
+  {
+   "config": "lookup",
+   "finding": {
+    "code": "unverified",
+    "form": "name",
+    "id": "b963e467f9ac34f2",
+    "legacyId": "f167fd7c8d31243d",
+    "line": 2,
+    "message": "Ausência não verificável: sumiu.md. O inventário e o índice de existência atingiram o limite (60 e 70 elementos), e o destino pode estar na parte não listada; abra um subdiretório para uma leitura completa.",
+    "path": "AGENTS.md",
+    "reason": "lookup",
+    "severity": "info",
+    "syntax": "markdown",
+    "target": "sumiu.md"
+   },
+   "root": "/aae-findings-before-english/escopo4"
+  },
+  {
+   "config": "text",
+   "finding": {
+    "byTopLevel": {
+     ".": 1,
+     ".claude": 1,
+     "arquivo": 36,
+     "docs": 9,
+     "ilha": 2,
+     "pacote": 2,
+     "x": 1,
+     "y": 1
+    },
+    "bytes": 2733,
+    "code": "limit",
+    "count": 53,
+    "id": "0f4fe507ee50958b",
+    "message": "Orçamento de texto da leitura atingido: 53 arquivo(s) de texto listado(s), mas não analisado(s) (2733 bytes). Referências e achados dentro deles não entram nesta leitura; cada um tem análise “skipped” e a lista completa está no relatório audit.",
+    "path": ".",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "text",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "8fb78335f94dbde3",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "ilha/i1.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "text",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "8726591d0a986802",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "ilha/i2.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "text",
+   "finding": {
+    "code": "manifest-unchecked",
+    "from": "pacote/b.md",
+    "id": "c63123124e97ca6a",
+    "line": 1,
+    "manifest": "pacote/agent-architecture.json",
+    "message": "Relação do manifesto não conferida com os links: b.md → a.md. Motivo: o arquivo de origem não foi lido inteiro (tamanho, limite de inventário, pasta não lida ou tipo não analisado).",
+    "path": "pacote/agent-architecture.json",
+    "reason": "source-not-read",
+    "severity": "info",
+    "target": "b.md → a.md",
+    "to": "pacote/a.md"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "edges",
+   "finding": {
+    "code": "limit",
+    "id": "4169169a88510214",
+    "message": "Limite de 12 relações atingido: 31 relação(ões) além dele ficaram fora da leitura, e a alcançabilidade, os sinais e as contagens de resolução são calculados sem elas.",
+    "severity": "incomplete"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "edges",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "bf532d7c08d375f1",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": ".claude/skills/uma/fundo/apoio.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "edges",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "a30aeab492da8537",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "pacote/a.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  },
+  {
+   "config": "edges",
+   "finding": {
+    "class": "orphan",
+    "code": "unreachable",
+    "conclusive": false,
+    "id": "471563df850bb1cc",
+    "inbound": 0,
+    "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+    "path": "pacote/b.md",
+    "severity": "info"
+   },
+   "root": "/aae-findings-before-english/principal"
+  }
+ ]
+}

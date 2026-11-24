@@ -1,0 +1,411 @@
+/* Loaded last: what does not exist stays apart from files, and the "Alterações" tool. Both themes via tokens. */
+/* What went away is said by its word in the colour of the text: the warning tone is for warnings only. */
+html {
+  --change-added: var(--accent);
+  --change-removed: var(--text);
+  --change-changed: var(--purple);
+}
+
+/* Unresolved destinations: collapsed under the real results, marked, never styled as files. */
+html .unresolved-group {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+html .filter-form .unresolved-group {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  max-height: 140px;
+  overflow: auto;
+  flex-shrink: 0;
+}
+html .unresolved-group > summary {
+  cursor: pointer;
+  padding: 9px 13px;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+html .unresolved-group > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+html .unresolved-group > p {
+  margin: 0;
+  padding: 0 13px 8px;
+  font-size: var(--fs-meta);
+  line-height: 1.6;
+  color: var(--muted);
+}
+html .unresolved-group > .unresolved-item {
+  display: flex;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  text-align: left;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 8px 13px;
+  font-size: var(--fs-meta);
+  overflow: hidden;
+}
+html .unresolved-group > .unresolved-item:hover,
+html .unresolved-group > .unresolved-item.selected {
+  background: var(--scope-soft);
+  color: var(--text);
+}
+html .unresolved-group > .unresolved-item > span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html .unresolved-group > .unresolved-item small {
+  display: block;
+  font-size: var(--fs-meta);
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--muted);
+}
+html .unresolved-tag {
+  flex-shrink: 0;
+  font-style: normal;
+  font-size: var(--fs-meta);
+  line-height: 1.5;
+  padding: 1px 5px;
+  border: 1px dashed var(--muted);
+  border-radius: 4px;
+  color: var(--text);
+  white-space: nowrap;
+}
+/* Objects: the full relative path tells .agents/skills/x from .claude/skills/x. */
+html .object-list button small {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+}
+
+html .dock-tools > button .dock-count {
+  color: var(--accent);
+  font-size: var(--fs-meta);
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  line-height: 16px;
+}
+html .change-notice {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
+  max-width: 46%;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--scope-soft);
+}
+html .change-notice > button:first-child {
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--fs-meta);
+  padding: 4px 6px;
+  gap: 5px;
+}
+html .change-notice > button:first-child:hover {
+  background: transparent;
+  color: var(--accent);
+  text-decoration: underline;
+}
+html .change-notice > button:first-child > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html .change-notice > button:first-child > svg {
+  color: var(--accent);
+}
+html .change-notice .icon-button {
+  padding: 4px;
+  color: var(--muted);
+}
+
+html .changes-content {
+  color: var(--text);
+  background: var(--surface);
+}
+html .changes-summary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-meta);
+  color: var(--muted);
+}
+html .changes-times {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+html .changes-times > svg {
+  color: var(--accent);
+}
+html .changes-times strong {
+  color: var(--text);
+  font-weight: 600;
+}
+html .changes-content .changes-adopt {
+  font-size: var(--fs-meta);
+  padding: 5px 9px;
+  background: var(--surface);
+  color: var(--accent);
+  border: 1px solid var(--line);
+}
+html .changes-content .changes-adopt:hover:not(:disabled) {
+  background: var(--scope-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+html .changes-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+/* "Reler agora": the same reading as "Reler diretórios", inside the tool that needs it. */
+html .changes-content .changes-reread {
+  font-size: var(--fs-meta);
+  padding: 5px 9px;
+  gap: 5px;
+  background: var(--accent);
+  color: var(--surface);
+  border: 1px solid var(--accent);
+}
+html .changes-content .changes-reread:hover:not(:disabled) {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--surface);
+}
+html .changes-content .changes-empty strong {
+  display: block;
+  margin-top: 4px;
+  font-weight: 600;
+  color: var(--text);
+}
+/* How the reference works: on demand, below the one-line note. */
+html .changes-about {
+  border-top: 1px solid var(--line);
+  background: var(--scope-bg);
+  color: var(--muted);
+  font-size: var(--fs-meta);
+  line-height: 1.6;
+}
+html .changes-about > summary {
+  cursor: pointer;
+  padding: 5px 16px;
+  color: var(--text);
+}
+html .changes-about > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+html .changes-about > p {
+  margin: 0;
+  padding: 0 16px 7px;
+}
+html .changes-about code {
+  font:
+    var(--fs-meta) / 1.5 ui-monospace,
+    monospace;
+  color: var(--text);
+}
+html .changes-content .change-row .change-code {
+  color: var(--text);
+}
+html .changes-confirmation {
+  margin: 0;
+  padding: 7px 16px;
+  font-size: var(--fs-meta);
+  color: var(--text);
+  background: var(--scope-soft);
+  border-bottom: 1px solid var(--line);
+}
+html .changes-content .changes-warning {
+  color: var(--tone-warning);
+}
+html .changes-content .changes-empty {
+  min-height: 90px;
+  justify-content: flex-start;
+  padding: 16px;
+  color: var(--muted);
+}
+html .changes-section {
+  border-top: 1px solid var(--line);
+}
+html .changes-section > h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px 6px;
+  font-size: var(--fs-meta);
+  color: var(--text);
+}
+html .changes-section > h3 > svg {
+  color: var(--muted);
+}
+html .changes-section > h3 > span {
+  margin-left: auto;
+  font-size: var(--fs-meta);
+  font-weight: 400;
+  color: var(--muted);
+}
+html .changes-content .change-row {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 9px;
+  padding: 8px 16px;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+  white-space: normal;
+  font-size: var(--fs-meta);
+  line-height: 1.5;
+}
+html .changes-content button.change-row:hover {
+  background: var(--scope-soft);
+  color: var(--text);
+}
+html .changes-content .change-row > span:not(.change-tag) {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+html .changes-content .change-row b {
+  font-weight: 600;
+}
+html .changes-content .change-row small {
+  display: block;
+  margin-top: 3px;
+  font-size: var(--fs-meta);
+  color: var(--muted);
+}
+html .changes-content .change-row code {
+  font:
+    var(--fs-meta) / 1.5 ui-monospace,
+    monospace;
+  color: var(--text);
+}
+html .changes-content .change-row > svg {
+  margin-top: 2px;
+  color: var(--muted);
+}
+html .change-tag {
+  flex-shrink: 0;
+  width: 66px;
+  font-size: var(--fs-meta);
+  line-height: 1.6;
+  font-weight: 600;
+}
+html .change-tag.added {
+  color: var(--change-added);
+}
+html .change-tag.removed {
+  color: var(--change-removed);
+}
+html .change-tag.changed {
+  color: var(--change-changed);
+}
+/* Observations: a new one in the colour of the text (its line says what it is), a resolved one in the
+   calm tone. */
+html .change-tag.added.finding {
+  color: var(--text);
+}
+html .change-tag.removed.finding {
+  color: var(--change-added);
+}
+/* A new observation marked as expected: neutral, dashed like the other marks of the app. */
+html .change-tag.added.finding.expected {
+  color: var(--muted);
+  border-style: dashed;
+}
+html .changes-more {
+  margin: 0;
+  padding: 6px 16px 9px;
+  font-size: var(--fs-meta);
+  line-height: 1.6;
+  color: var(--muted);
+}
+html .changes-more code {
+  font:
+    var(--fs-meta) / 1.5 ui-monospace,
+    monospace;
+  color: var(--text);
+}
+
+/* Footer counters (files apart from unresolved destinations) in the shared muted token: at least 4.5:1 in both themes. */
+html .status-bar {
+  color: var(--muted);
+}
+/* "N destinos não resolvidos" opens the audit on those references: a link, not a raised button. */
+html .status-bar .status-link {
+  display: inline;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font-size: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+html .status-bar .status-link:hover {
+  background: transparent;
+  color: var(--accent);
+  text-decoration-style: solid;
+}
+html .status-bar .status-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+/* "Leitura parcial": the inventory limit left part of the tree out; always visible while it lasts. */
+html .status-bar .status-link.status-partial {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-right: 8px;
+  font-weight: 600;
+}
+html[data-theme] .status-bar .status-link.status-partial {
+  color: var(--tone-warning);
+}
+
+/* Origin of the reference: "salva em disco" (loaded from the app state) or "desta sessão"; "não salva" when kept in memory only. */
+html .changes-times .changes-origin {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: var(--fs-meta);
+  line-height: 15px;
+  white-space: nowrap;
+}
+html .changes-times .changes-origin.unsaved {
+  margin-left: 4px;
+  border-color: currentColor;
+  color: var(--tone-warning);
+}

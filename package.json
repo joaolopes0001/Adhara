@@ -1,0 +1,48 @@
+{
+  "name": "agent-architecture-explorer",
+  "version": "1.0.0",
+  "description": "Local Linux app to map, audit and edit agent context files (AGENTS.md, CLAUDE.md, memory, skills) through the explicit references between them.",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaolopes0001/Adhara.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joaolopes0001/Adhara/issues"
+  },
+  "homepage": "https://github.com/joaolopes0001/Adhara#readme",
+  "os": [
+    "linux"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "test": "python3 -m unittest discover -s tests -t . -v",
+    "test:ui": "playwright test",
+    "test:audit": "npm run build && npm test && npm run test:ui -- --grep-invert 'Optional run on a real directory copy'",
+    "format": "prettier --write src tests/ui playwright.config.ts vite.config.ts",
+    "format:check": "prettier --check src tests/ui playwright.config.ts vite.config.ts",
+    "i18n:check": "node scripts/i18n-check.mjs",
+    "start": "python3 server/main.py"
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.10.0",
+    "lucide-react": "^0.577.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.1.0",
+    "prettier": "3.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0"
+  }
+}

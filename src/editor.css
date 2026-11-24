@@ -1,0 +1,629 @@
+/* Editing a document in the inspector, composed of the patterns the window already has: the editor in
+   the place of the read-only text, with its metrics; the actions in the boxes of the file's actions
+   (.endpoint-actions); a state line at the foot, as the bottom bar says its state; notes as text in the
+   tone's colour, no icon and no box (.analysis-note); lines as the read-only preview draws them
+   (.source-code), dialogs (.modal) and rows of the saved projects list (.saved-case). No box of its own;
+   the only motion is the slide of the area when a small window has no room for the text (FileEditor.tsx). */
+
+/* "Definir como A", "Definir como B", "Editar"; editing, "Gravar" and "Fechar editor" in the boxes of A
+   and B and the third box empty: three equal boxes, and the height the letter badges of A and B give the
+   row also without them, so that switching moves nothing. Unavailable keeps the tooltip with the reason
+   (aria-disabled). */
+html .inspector-identity .endpoint-actions {
+  display: grid;
+  /* Equal boxes up to 160 px each, from the left: a wide inspector does not stretch them into bars. */
+  grid-template-columns: repeat(3, minmax(0, 160px));
+}
+html .inspector-identity .endpoint-actions > button {
+  min-height: calc(1.2 * var(--fs-meta) + 20px);
+}
+@media (max-width: 1023px) {
+  html .inspector-identity .endpoint-actions > button {
+    min-height: calc(1.2 * var(--fs-meta) + 18px);
+  }
+}
+/* A button that appeared under the pointer when the row switched (Definir como B after Fechar editor, Ver
+   mudanças after Editar) keeps its plain look until the pointer moves. */
+html[data-theme='light']
+  .inspector-identity
+  .endpoint-actions[data-fresh]
+  > button:not(.primary):not([aria-pressed='true']):hover {
+  background: #fff;
+  border-color: #dfe5ec;
+}
+html[data-theme='dark']
+  .inspector-identity
+  .endpoint-actions[data-fresh]
+  > button:not(.primary):not([aria-pressed='true']):hover {
+  background: rgb(19, 35, 59);
+  border-color: #344b67;
+}
+html[data-theme] .inspector-identity .endpoint-actions button[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+html[data-theme] .inspector-identity .endpoint-actions .edit-save[aria-disabled='true'] {
+  cursor: progress;
+}
+
+/* A note: the sentence in the color of the problem, no icon and no box (as .analysis-note of the
+   inspector). Text buttons inside it are underlined. */
+html .edit-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 0;
+  font-size: var(--fs-ui);
+  line-height: 1.5;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+html .edit-note:empty {
+  display: none;
+}
+html .edit-note > .tone-problem {
+  color: var(--tone-problem);
+}
+html .inspector-scroll > .edit-note {
+  padding: 10px 13px 0;
+}
+/* A click target of at least 24 px, as the other links of the app, without changing the text line. */
+html[data-theme] .edit-note .text-button,
+html[data-theme] .edit-note .text-button:hover {
+  display: inline-block;
+  min-height: 24px;
+  padding: 3px 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  line-height: 18px;
+  vertical-align: baseline;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* The editor in the place of the read-only text (.inspector .source-code): the same letter and line
+   height (11 px, 19.8 px), the indent of 40 px where the line numbers were and the right margin of 12
+   px, so that every line stays where it was. No scroll of its own (it grows with the text; the area of
+   the inspector scrolls) and no border that would move the text: the field background, and the focus
+   drawn inside. The tab is a column, so that the text reaches the state line held at the foot; the
+   browser does not scroll the area to keep something in place (scroll anchoring). */
+html .inspector-scroll:has(> .file-editor) {
+  overflow-anchor: none;
+  display: flex;
+  flex-direction: column;
+}
+html .inspector-scroll:has(> .file-editor) > * {
+  flex-shrink: 0;
+}
+html .file-editor {
+  display: contents;
+}
+/* The column of the line numbers, the same in the read-only text and in the editor: 12 px free (where
+   the signs of "Ver mudanças" go), the widest number of the file, 11 px to the text; 40 px at least, so
+   that nothing changes up to 99 lines. `--line-digits` is set by each text; `ch` is a digit of its
+   letter. */
+html .inspector :is(.source-code, .editor-lines) {
+  --gutter: max(40px, calc(23px + var(--line-digits, 2) * 1ch));
+}
+/* The text and, at its left, the numbers of the lines in view, each at the top of its line (on the
+   first visual line of a line that wraps), in the letter, line height and color of the read-only
+   numbers; the line of the cursor in the color of the text. No background, no rule. */
+html .editor-lines {
+  position: relative;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+html .editor-gutter {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  /* Its own letter, so that the width (in digits) is that of the numbers. */
+  font:
+    var(--fs-meta) / 1.8 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  width: var(--gutter);
+  pointer-events: none;
+  user-select: none;
+}
+html .editor-gutter > span,
+html .marks-number {
+  font:
+    var(--fs-meta) / 1.8 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  color: var(--muted);
+  text-align: right;
+}
+html .editor-gutter > span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding-right: 11px;
+}
+html .editor-gutter > span.is-current {
+  color: var(--text);
+}
+html[data-theme] .editor-text {
+  flex: 1 0 auto;
+  field-sizing: content;
+  /* Eight lines at least, and the 8 px above and below them. */
+  min-height: calc(8lh + 16px);
+  width: 100%;
+  margin: 0;
+  padding: 8px 12px 8px var(--gutter);
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  resize: none;
+  font:
+    var(--fs-meta) / 1.8 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  tab-size: 2;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  background: var(--brand-paper);
+}
+html[data-theme='dark'] .editor-text {
+  background: var(--dark-raised);
+}
+html[data-theme] .editor-text:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* The state line: 28 px at the foot of the inspector while the editor is open, under the area that
+   scrolls (so that focusing an action never scrolls the text); 11 px letter, the sentence on the left and
+   its actions on the right; a line of 1 px above it, no box. It is never cut: what does not fit leaves
+   whole for the "…" menu, measured on hidden copies (.editor-status-measure). */
+html .editor-foot {
+  position: relative;
+  flex: none;
+  height: 28px;
+}
+html .editor-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 28px;
+  padding: 0 13px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  font-size: var(--fs-meta);
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--text);
+}
+html .editor-status-text,
+html .editor-status-actions {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+html .editor-status-text {
+  gap: 5px;
+}
+html .editor-status-text > .editor-status-slot {
+  color: var(--muted);
+}
+html .editor-status-actions {
+  gap: 10px;
+  margin-left: auto;
+}
+html :is(.editor-status, .editor-status-measure) svg {
+  flex: none;
+}
+html .editor-status .editor-status-tone.tone-warning,
+html .editor-status-text > .editor-status-slot > .editor-status-part.tone-warning {
+  color: var(--tone-warning);
+}
+html .editor-status .editor-status-tone.tone-problem {
+  color: var(--tone-problem);
+}
+html .editor-status-measure {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  font-size: var(--fs-meta);
+  line-height: 24px;
+  white-space: nowrap;
+}
+html .editor-status-measure > * {
+  display: block;
+  width: max-content;
+}
+html .editor-status-measure > .editor-status-lead {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+html .editor-status-more-size {
+  width: 24px;
+}
+html[data-theme] :is(.editor-status, .editor-status-measure) .text-button,
+html[data-theme] :is(.editor-status, .editor-status-measure) .text-button:hover,
+html[data-theme] :is(.editor-status, .editor-status-measure) .editor-motive,
+html[data-theme] :is(.editor-status, .editor-status-measure) .editor-motive:hover {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  line-height: 24px;
+}
+html[data-theme] :is(.editor-status, .editor-status-measure) .text-button {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* The observation being corrected: the line as the list writes it (underlined), the destination in
+   code, the kind in the muted color. */
+html[data-theme] :is(.editor-status, .editor-status-measure) .editor-motive {
+  gap: 5px;
+  color: var(--text);
+}
+html .editor-motive-line {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+html .editor-motive code {
+  font-size: var(--fs-meta);
+  font-weight: 600;
+}
+html .editor-motive-title {
+  color: var(--muted);
+  white-space: pre;
+}
+html .editor-motive-title > .tone-problem {
+  color: var(--tone-problem);
+}
+html .editor-motive-title > .tone-warning {
+  color: var(--tone-warning);
+}
+html[data-theme] .editor-status .editor-status-more.bar-menu {
+  min-height: 24px;
+  height: 24px;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+}
+html[data-theme] .editor-status .editor-status-more.bar-menu:hover {
+  background: var(--scope-soft);
+}
+
+/* What is above the text while the file is edited: an observation a save resolved stays in its line,
+   marked; "refresh list" takes the list again. */
+html .file-observation-resolved {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  margin-left: auto;
+  font-size: var(--fs-meta);
+  color: var(--muted);
+}
+html .observations-refresh {
+  margin-left: auto;
+  font-size: var(--fs-meta);
+}
+html .observations-refresh + .observations-toggle {
+  margin-left: 0;
+}
+html[data-theme] .file-observations button.observations-refresh {
+  min-height: 24px;
+  padding: 0;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* The lines of a comparison: the line number and the text as the preview draws a file; the sign in green
+   or brick red (--mark-added, --mark-removed), never a colored background. */
+html .diff-list .source-code {
+  padding: 2px 0;
+  color: var(--text);
+}
+html .diff-list .source-code + .source-code {
+  border-top: 1px solid var(--line);
+}
+html .diff-list .source-code > div > span {
+  width: 40px;
+  padding-right: 8px;
+}
+html .diff-sign {
+  flex: none;
+  width: 2ch;
+  font-weight: 700;
+}
+html .diff-sign.added {
+  color: var(--mark-added);
+}
+html .diff-sign.removed {
+  color: var(--mark-removed);
+}
+html .diff-note {
+  margin: 4px 0;
+  font-size: var(--fs-meta);
+  color: var(--muted);
+}
+
+/* "Leitura desatualizada", in the line of notices under the bar, drawn as "Desde a referência…". */
+html .stale-notice > span {
+  padding: 4px 6px;
+  font-size: var(--fs-meta);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-theme] .stale-notice > button {
+  min-height: 24px;
+  padding: 2px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--fs-meta);
+  text-decoration: underline;
+}
+
+/* The bottom bar: "Edição ligada: projeto" as the "Estado" menu button, its icon in the colour of the text
+   (a state, not a warning); the editor's line and column as the other plain items. */
+html[data-theme] .app-footer .status-editing.bar-menu {
+  min-height: 24px;
+  padding: 2px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--fs-meta);
+  gap: 5px;
+}
+html[data-theme] .app-footer .status-editing.bar-menu:hover,
+html[data-theme] .app-footer .status-editing.bar-menu.active {
+  background: var(--scope-soft);
+}
+html .app-footer .status-cursor {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+html .edit-dialog-body {
+  padding: 0 25px;
+  color: var(--text);
+  font-size: var(--fs-ui);
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+html .edit-dialog-body > p + p,
+html .edit-dialog-body > p + .edit-note,
+html .edit-dialog-body > p + .diff-list {
+  margin-top: 10px;
+}
+/* The conflict and the differences: the lists scroll inside the body, so that the footer with the ways
+   out is always in the window. The conflict's two lists side by side, each under its heading. */
+html .modal:has(> .conflict-body) {
+  overflow: hidden;
+}
+html .conflict-body {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+html .conflict-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+html .conflict-body.single {
+  grid-template-columns: 1fr;
+}
+html .conflict-body > section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+html .conflict-body h3 {
+  margin: 0;
+  padding: 0 0 6px;
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+}
+html .conflict-body .diff-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  border-bottom: 1px solid var(--line);
+}
+html[data-theme] .modal-footer .text-button {
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* The list of unsaved documents: rows divided by a line, as the saved projects list. */
+html .pending-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  border-block: 1px solid var(--line);
+}
+html .pending-item {
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--line);
+}
+html .pending-item:last-child {
+  border-bottom: 0;
+}
+html .pending-head {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-width: 0;
+  font-size: var(--fs-ui);
+}
+html .pending-head > strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+html .pending-state {
+  margin-left: auto;
+  font-size: var(--fs-meta);
+  color: var(--muted);
+  white-space: nowrap;
+}
+html .pending-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+html[data-theme] .pending-actions button {
+  font-size: var(--fs-meta);
+  padding: 5px 10px;
+}
+html .pending-text {
+  width: 100%;
+  min-height: 8em;
+  margin-top: 6px;
+  font:
+    var(--fs-meta) / 1.6 ui-monospace,
+    monospace;
+}
+html .diff-list .source-code > div {
+  min-width: 0;
+}
+html .diff-list .source-code code {
+  min-width: 0;
+  max-width: none;
+}
+
+/* "Ver mudanças": the colors of the signs and of the underline of what differs, only there (contrast
+   at least 4.5:1 on the text's background in both themes). Added is green, removed the brick red that
+   already says "erase". */
+html[data-theme='light'] {
+  --mark-added: #0b6b1e;
+  --mark-removed: #a3361f;
+}
+html[data-theme='dark'] {
+  --mark-added: #6fd383;
+  --mark-removed: #d97a5f;
+}
+html[data-theme] .inspector-identity .endpoint-actions .edit-marks[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--scope-soft);
+  color: var(--text);
+}
+/* The text with its changes, to read: the background of the read-only text, no cursor, no rule; the
+   field to edit stays behind it, as it was. Rows as the read-only text draws its lines: the number in
+   the column, the text with the same wrapping; the sign in the 12 px left of the number. */
+html[data-theme] .editor-text.is-behind {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+html .editor-marks {
+  position: relative;
+  flex: 1 0 auto;
+  min-height: calc(8 * 19.8px + 16px);
+  font:
+    var(--fs-meta) / 1.8 ui-monospace,
+    SFMono-Regular,
+    Consolas,
+    monospace;
+  color: var(--text);
+}
+html .marks-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-right: 12px;
+}
+html .marks-row > .marks-number {
+  flex: none;
+  width: var(--gutter);
+  padding-right: 11px;
+  user-select: none;
+}
+html .marks-row > code {
+  flex: 1;
+  min-width: 0;
+  /* An empty line is a line (and copies as an empty line, not as a space). */
+  min-height: 19.8px;
+  font: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  tab-size: 2;
+}
+html .marks-sign {
+  position: absolute;
+  left: 0;
+  width: 12px;
+  text-align: center;
+  font-weight: 700;
+  user-select: none;
+}
+html .marks-row .visually-hidden {
+  user-select: none;
+}
+html .marks-added > .marks-sign {
+  color: var(--mark-added);
+}
+html .marks-removed > .marks-sign {
+  color: var(--mark-removed);
+}
+/* A removed line is not in the file: muted, and out of the copy. */
+html .marks-removed > code {
+  color: var(--muted);
+  user-select: none;
+}
+html .marks-row u {
+  text-decoration: underline 2px;
+  text-underline-offset: 3px;
+}
+html .marks-added u {
+  text-decoration-color: var(--mark-added);
+}
+html .marks-removed u {
+  text-decoration-color: var(--mark-removed);
+}
+
+/* What is written is what is shown: no ligatures nor contextual alternates (`<=`, `!=`, `->`, `../`).
+   Last in the file: the `font` shorthand above resets both properties. */
+html[data-theme] :is(.editor-text, .editor-marks, .diff-list, .diff-list code, .pending-text) {
+  font-variant-ligatures: none;
+  font-feature-settings:
+    'liga' 0,
+    'clig' 0,
+    'calt' 0,
+    'dlig' 0;
+}

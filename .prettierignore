@@ -1,0 +1,7 @@
+dist
+node_modules
+test-results
+docs
+*.md
+package-lock.json
+tsconfig.tsbuildinfo

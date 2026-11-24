@@ -1,0 +1,297 @@
+/* The default theme covers the entire workspace, including portal dialogs. */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --line: #253b58;
+  --muted: #abbdd2;
+  --green: #8ec5ff;
+  --purple: #bca6e0;
+  --dark-bg: #00081b;
+  --dark-panel: #0a172d;
+  --dark-raised: #13233b;
+  --dark-text: #f6fafd;
+  background: var(--dark-bg);
+  color: var(--dark-text);
+}
+html[data-theme='dark'] * {
+  border-color: var(--line);
+  scrollbar-color: #516159 #0a172d;
+}
+html[data-theme='dark'] :is(.app-shell, .main-pane, .canvas-wrap) {
+  background: var(--dark-bg);
+}
+html[data-theme='dark']
+  :is(.app-header, .explorer, .inspector, .bottom-panel, .modal, .audit-summary) {
+  background: var(--dark-panel);
+}
+html[data-theme='dark'] :is(.trace-bar, .status-bar, .source-path, .blueprint-body nav) {
+  background: #071328;
+}
+html[data-theme='dark'] :is(button, input, select, textarea, .search-box, .copy-path, .primitive) {
+  background: var(--dark-raised);
+  color: var(--dark-text);
+  border-color: #344b67;
+}
+html[data-theme='dark'] :is(input, select, textarea) {
+  accent-color: #8ec5ff;
+}
+html[data-theme='dark'] :is(input, textarea)::placeholder {
+  color: #9bafc7;
+}
+html[data-theme='dark'] button:hover {
+  background: #1b3556;
+  color: #f6fafd;
+  border-color: #638bb7;
+}
+html[data-theme='dark'] button.primary {
+  background: #014a94;
+  color: #fff;
+  border-color: #2e75bb;
+}
+html[data-theme='dark'] button.primary:hover {
+  background: #075ead;
+}
+html[data-theme='dark']
+  :is(
+    button.icon-button,
+    .small-tabs button,
+    .tree-item,
+    .search-results button,
+    .object-list button,
+    .relation-target,
+    .trace-step > button,
+    .section-heading button,
+    .blueprint-body nav button,
+    .directory-list > button
+  ) {
+  background: transparent;
+  color: #bacce0;
+}
+html[data-theme='dark']
+  :is(
+    button.icon-button:hover,
+    button.icon-button.active,
+    .tree-item:hover,
+    .search-results button:hover,
+    .object-list button:hover,
+    .relation-target:hover,
+    .directory-list > button:hover,
+    .trace-step > button:hover
+  ) {
+  background: #173554;
+  color: #e1f0ff;
+}
+html[data-theme='dark']
+  :is(.tree-item.selected, .search-results button.selected, .blueprint-body nav button.active) {
+  background: #173b65;
+  color: #c4e2ff;
+}
+html[data-theme='dark'] .tree-item.selected {
+  box-shadow: inset 2px 0 #8ec5ff;
+}
+html[data-theme='dark'] .small-tabs button:not(.active) {
+  border-bottom-color: transparent;
+}
+html[data-theme='dark'] :is(.small-tabs button.active) {
+  color: #abd4ff;
+  border-bottom-color: #8ec5ff;
+}
+html[data-theme='dark']
+  :is(
+    h1,
+    h2,
+    h3,
+    .modal-head h2,
+    .section-heading h3,
+    .note-editor h3,
+    .inspector-empty h3,
+    .tile-name,
+    .tree-item.entry,
+    .tree-root,
+    .help-content strong,
+    .directory-list > button span,
+    .breadcrumbs strong
+  ) {
+  color: #e6f1fb;
+}
+html[data-theme='dark'] :is(kbd, .root-title span) {
+  background: #142d4b;
+  color: #bbd7f3;
+  border-color: #33597e;
+}
+html[data-theme='dark'] :is(.count, .type-label, .relation-chip) {
+  color: var(--muted);
+}
+html[data-theme='dark'] :is(.logical-object, .trace-bar b, .trace-step > b, .endpoint-actions b) {
+  background: #352e44;
+  color: #d0bde9;
+  border-color: #574866;
+}
+html[data-theme='dark'] :is(.trace-summary, .note-editor .save-status, .load-more) {
+  color: #a2d1ff;
+}
+html[data-theme='dark'] .trace-step .step-evidence {
+  color: #c2aadd;
+}
+html[data-theme='dark'] .source-code {
+  color: #d8e8f8;
+}
+html[data-theme='dark'] .highlight-line {
+  background: #45422b;
+}
+html[data-theme='dark'] :is(.error, .error-banner) {
+  background: var(--banner-bg);
+  color: var(--text) !important;
+  border-color: var(--banner-line);
+}
+html[data-theme='dark'] .status-dot {
+  background: #8fc8ff;
+}
+html[data-theme='dark'] .status-dot.declared {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px #8fc8ff;
+}
+html[data-theme='dark'] .file-tile {
+  background: #10243e;
+  color: var(--dark-text);
+  border-color: #3c5877;
+  box-shadow: 0 3px 12px #0003;
+}
+html[data-theme='dark'] .file-tile.entry {
+  border-top-color: #438ed8;
+}
+html[data-theme='dark'] :is(.file-tile.memory, .file-tile.skill) {
+  border-top-color: #bda2d6;
+}
+html[data-theme='dark'] .file-tile.manifest {
+  border-top-color: #9ab6cc;
+}
+html[data-theme='dark'] .file-tile.focused {
+  border-color: #8ec5ff;
+  box-shadow: 0 0 0 3px #8ec5ff33;
+}
+html[data-theme='dark'] .file-tile.traced {
+  border-color: #c4a9e0;
+  box-shadow: 0 0 0 3px #baa0d63d;
+}
+html[data-theme='dark'] .file-tile.missing {
+  background: #332b24;
+  border-color: var(--tone-problem);
+}
+html[data-theme='dark'] .file-tile.declared {
+  background: #0c1b30;
+  border-color: #6d87a6;
+  border-style: dashed;
+}
+html[data-theme='dark'] .tile-foot {
+  border-top-color: #2d4260;
+}
+html[data-theme='dark'] .tile-foot i {
+  background: #3c5676;
+}
+html[data-theme='dark'] .react-flow__node-root {
+  background: #10233b80;
+  border-color: #304b6d;
+}
+html[data-theme='dark'] .react-flow__handle {
+  background: #8ec5ff;
+  border-color: #10243e;
+}
+html[data-theme='dark'] .react-flow__edge-textbg {
+  fill: #10243e;
+}
+html[data-theme='dark'] .react-flow__edge-text {
+  fill: #d8e8f8;
+}
+html[data-theme='dark'] .modal-shade {
+  background: #00081bb3;
+}
+html[data-theme='dark'] .modal {
+  box-shadow: 0 25px 100px #0008;
+}
+html[data-theme='dark'] .case-choice {
+  background: transparent;
+  color: var(--text);
+}
+html[data-theme='dark'] .case-choice:hover {
+  background: #173554;
+}
+html[data-theme='dark'] .case-choice[aria-pressed='true'] {
+  background: var(--scope-soft);
+}
+
+/* Quiet buttons look the same in both themes: bar buttons without a plate, text buttons as links.
+   The generic button rule above would otherwise give them the raised background in the dark theme. */
+html[data-theme] .dock-tools > button {
+  border-color: transparent;
+  background: transparent;
+  color: var(--muted);
+}
+html[data-theme] .dock-tools > button:not(:disabled):hover {
+  border-color: transparent;
+  background: var(--scope-soft);
+  color: var(--text);
+}
+html[data-theme] .dock-menu button {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text);
+}
+html[data-theme] .dock-menu button:is(:hover, :focus-visible) {
+  background: var(--scope-soft);
+}
+/* Bottom bar: the active tool is bold and underlined, like the class filter; hover is a light plate and
+   pressed a stronger one, so rest, hover, pressed and active all differ by more than a faint fill. */
+html[data-theme] .dock-tools > button.active,
+html[data-theme] .dock-tools > button.active:not(:disabled):hover {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+html[data-theme] .dock-tools > button.active:not(:disabled):hover {
+  background: var(--scope-soft);
+}
+html[data-theme] .dock-tools > button:not(:disabled):active,
+html[data-theme] .dock-tools > button.active:not(:disabled):hover:active {
+  background: var(--line);
+  color: var(--text);
+}
+html[data-theme]
+  :is(
+    .audit-explain,
+    .expected-button,
+    .expected-note button,
+    .file-observation-line,
+    .diagnosis-link,
+    .diagnosis-candidates button,
+    .audit-project button,
+    .load-more
+  ) {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--accent);
+}
+html[data-theme]
+  :is(
+    .audit-explain,
+    .expected-button,
+    .expected-note button,
+    .file-observation-line,
+    .diagnosis-link,
+    .diagnosis-candidates button,
+    .audit-project button,
+    .load-more
+  ):hover {
+  background: transparent;
+  color: var(--accent);
+  text-decoration: underline;
+}
+html[data-theme] .status-bar .status-link,
+html[data-theme] .status-bar .status-link:hover {
+  background: transparent;
+}
+html[data-theme] .status-bar .status-link:hover {
+  color: var(--accent);
+}

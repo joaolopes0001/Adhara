@@ -1,0 +1,379 @@
+/* The frame of the window: one bar on top, one at the bottom, nothing else around the content.
+   Loaded last, so these rules settle what the older per-component rules said about the same bars. */
+
+html .app-shell .app-header {
+  height: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--line);
+}
+html .app-header .brand {
+  flex: none;
+  padding: 0 6px 0 2px;
+}
+html .app-header .brand img {
+  width: 22px;
+  height: 22px;
+}
+html .app-header .history-controls {
+  display: flex;
+  flex: none;
+  margin: 0;
+}
+/* The location shrinks before anything else, the middle folders first, each with an ellipsis. */
+html .app-header .breadcrumbs {
+  flex: 0 1 auto;
+  min-width: 28px;
+  gap: 2px;
+  overflow: hidden;
+}
+html .app-header .breadcrumbs > .icon-button {
+  flex: none;
+}
+html .app-header .breadcrumbs > .breadcrumb-segments {
+  overflow: hidden;
+  gap: 0;
+}
+html .app-header .breadcrumbs .breadcrumb-segments > .breadcrumb-segments {
+  flex: 0 6 auto;
+  min-width: 0;
+  overflow: hidden;
+  gap: 1px;
+}
+/* Who gives way first: the project name, then the parent folder; the current item last. */
+html .app-header .breadcrumbs .breadcrumb-segments > .breadcrumb-segments:first-child {
+  flex-shrink: 20;
+  min-width: 5em;
+}
+html .app-header .breadcrumbs .breadcrumb-segments > .breadcrumb-segments:last-child {
+  flex-shrink: 1;
+  min-width: var(--crumb-current-min, 0);
+}
+/* The current item takes the room there is: no cap; without room, it ends in an ellipsis (whole in the
+   tooltip). The parts that would have no room at all go into the "…" (App.tsx, fitCrumbs). */
+html .app-header .breadcrumbs .breadcrumb-segments > .breadcrumb-segments:last-child > button {
+  max-width: none;
+}
+html .app-header .breadcrumbs .breadcrumb-segments > .breadcrumb-segments.breadcrumb-middle {
+  flex: none;
+}
+html[data-theme] .app-header .breadcrumb-more {
+  min-height: 24px;
+  padding: 2px 4px;
+  color: var(--muted);
+}
+/* The focus outline is drawn inside, so the clipping of the location never cuts it. */
+html .app-header .breadcrumbs button:focus-visible {
+  outline-offset: -2px;
+}
+html .app-header .breadcrumbs .breadcrumb-segments > .breadcrumb-segments > svg {
+  flex: none;
+}
+html .app-header .breadcrumb-segments button {
+  flex-shrink: 1;
+  min-width: 2.2em;
+  max-width: 220px;
+  white-space: nowrap;
+  font-size: var(--fs-ui);
+}
+html .app-header .breadcrumbs .breadcrumb-root {
+  max-width: 220px;
+  min-width: 2.2em;
+}
+/* The location is text that navigates, not a row of raised buttons. */
+html[data-theme] .app-header .breadcrumb-segments button {
+  border-color: transparent;
+  background: transparent;
+}
+html[data-theme] .app-header .breadcrumb-segments button:hover {
+  background: var(--scope-soft);
+}
+html .app-header .breadcrumbs > strong {
+  font-size: var(--fs-ui);
+}
+html .app-header .top-view-mode {
+  flex: none;
+  display: flex;
+  margin-left: 10px;
+}
+html .app-header .top-view-mode:empty {
+  display: none;
+}
+html .app-header .bar-space {
+  flex: 1 1 0;
+  min-width: 4px;
+}
+/* Notices after a reading or a removal: their own line under the bar (and under the strip), at the right;
+   in the flow, so they never cover a control. */
+html .app-shell > .bar-notices {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 8px;
+  padding: 3px 8px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+html .app-shell > .bar-notices .change-notice {
+  max-width: 100%;
+}
+html .app-header .reread-button {
+  flex: none;
+  gap: 5px;
+  padding: 5px 8px;
+  font-size: var(--fs-ui);
+}
+/* Projetos ▾ and Mais: a name next to the icon, quiet like the other bar buttons. */
+html[data-theme] .app-header .bar-menu {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 30px;
+  padding: 5px 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--fs-ui);
+}
+html[data-theme] .app-header .bar-menu:not(:disabled):hover {
+  background: var(--scope-soft);
+}
+html[data-theme] .app-header .bar-menu.active {
+  background: var(--scope-soft);
+  color: var(--accent);
+}
+html .app-header .bar-menu-arrow {
+  margin-left: -1px;
+  color: var(--muted);
+}
+.dock-menu {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  white-space: normal;
+}
+html[data-theme] .dock-menu button[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: default;
+}
+html[data-theme] .dock-menu button[aria-disabled='true']:hover {
+  background: none;
+}
+
+#workspace-view-tabs {
+  flex: none;
+  min-width: 0;
+}
+#workspace-view-tabs:empty {
+  display: none;
+}
+
+/* Bottom bar: the tools on the left, the state of the reading on the right, in one line. */
+html .app-shell .app-footer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 34px;
+  min-height: 34px;
+  min-width: 0;
+  padding: 0 8px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+html .app-footer .dock-tools {
+  flex: none;
+  min-height: 0;
+  padding: 0;
+  gap: 2px;
+  overflow: visible;
+}
+html .app-footer .dock-tools > button {
+  min-height: 28px;
+  padding: 4px 8px;
+  font-size: var(--fs-ui);
+}
+html .app-footer .convention-toggle {
+  margin-left: 6px;
+  white-space: nowrap;
+  font-size: var(--fs-ui);
+}
+/* The state of the reading: items whole, never with an ellipsis. StatusLine (App.tsx) takes out the least
+   important ones when the line has no room; they stay measurable, out of view and of the keyboard, and the
+   "Estado" menu lists them. */
+html[data-theme] .app-footer .status-bar {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+html .app-footer .status-bar > :is(.status-slot, .status-more) {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+}
+html .app-footer .status-bar > [data-hidden] {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+}
+html .app-footer .status-state,
+html .app-footer .status-readonly,
+html .app-footer .status-partial {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+/* The two links are click targets of at least 24 px, apart from each other by the gap. */
+html .app-footer .status-bar .status-link {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2px;
+  margin: 0;
+}
+html[data-theme] .app-footer .status-more .bar-menu {
+  min-height: 24px;
+  padding: 2px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--fs-meta);
+}
+html[data-theme] .app-footer .status-more .bar-menu:hover {
+  background: var(--scope-soft);
+}
+html[data-theme] .dock-menu button.menu-info,
+html[data-theme] .dock-menu button.menu-info:hover {
+  opacity: 1;
+  background: none;
+  color: var(--text);
+  cursor: default;
+}
+html[data-theme] .dock-menu button.menu-info:focus-visible {
+  background: var(--scope-soft);
+}
+/* A menu fact in a tone (the partial reading, out of the bottom bar): no icon, the label in its colour. */
+html .dock-menu .menu-icon-slot {
+  flex: none;
+  width: 14px;
+}
+html .dock-menu button > .tone-warning {
+  color: var(--tone-warning);
+}
+html .dock-menu button > .tone-problem {
+  color: var(--tone-problem);
+}
+
+html .app-shell .explorer {
+  position: relative;
+}
+html .app-shell .explorer > .search-box {
+  margin-top: 10px;
+}
+html .explorer .class-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+}
+html[data-theme] .explorer .class-filter select {
+  flex: none;
+  field-sizing: content;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 26px;
+  padding: 2px 4px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--fs-meta);
+}
+/* Whole, with its number, pressed or not: the selector gives way, then the line wraps. */
+html .explorer .class-filter .class-observed {
+  flex: none;
+  min-height: 24px;
+  white-space: nowrap;
+}
+html .explorer > .project-drag-hint {
+  inset: auto 0 0 0;
+}
+
+html .app-shell .inspector {
+  position: relative;
+}
+html .inspector > .inspector-close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+}
+html .inspector-identity,
+html .inspector .directory-overview {
+  padding-right: 40px;
+}
+html .inspector .inspector-empty {
+  padding-top: 40px;
+}
+
+@media (max-width: 1023px) {
+  html .app-shell .app-header {
+    gap: 2px;
+    padding: 0 4px;
+  }
+  html .app-header .top-view-mode {
+    margin-left: 4px;
+  }
+  html[data-theme] .app-header .bar-menu,
+  html .app-header .reread-button {
+    padding: 4px 6px;
+  }
+  html .app-shell .app-footer {
+    gap: 8px;
+    padding: 0 4px;
+  }
+  /* Narrow window: the tools keep their names and drop the icons. */
+  html .app-footer .dock-tools > button > svg {
+    display: none;
+  }
+  html .app-footer .dock-tools > button {
+    padding: 4px 6px;
+  }
+  html[data-theme] .app-footer .status-bar {
+    gap: 8px;
+  }
+}
+@media (max-height: 550px) {
+  html .app-shell .app-header {
+    height: 40px;
+    min-height: 40px;
+  }
+  html .app-shell .app-footer {
+    height: 32px;
+    min-height: 32px;
+  }
+}
+/* A disabled control of the bars stays visible in the light theme (at least about 2.5:1). */
+html[data-theme='light'] .app-header button:disabled {
+  opacity: 0.6;
+}

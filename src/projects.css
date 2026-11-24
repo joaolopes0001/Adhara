@@ -1,0 +1,341 @@
+/* Opened projects in the explorer (order, removal), the list of projects on Home, the dialog of forgetting. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.project-list {
+  position: relative;
+}
+.project-list .tree-root {
+  gap: 4px;
+  padding-left: 6px;
+  padding-right: 8px;
+}
+.tree-root .root-handle {
+  flex-shrink: 0;
+  padding: 4px 1px;
+  cursor: grab;
+  touch-action: none;
+  color: var(--muted);
+}
+.tree-root .root-handle[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: default;
+}
+.project-list.is-dragging,
+.project-list.is-dragging .root-handle {
+  cursor: grabbing;
+  user-select: none;
+}
+.root-section.is-dragged > .tree-root {
+  opacity: 0.55;
+  outline: 1px dashed var(--accent);
+  outline-offset: -1px;
+  border-radius: 4px;
+}
+.root-section.is-dragged > :not(.tree-root, .project-drop-line) {
+  opacity: 0.45;
+}
+.project-drop-line {
+  height: 2px;
+  margin: 0 10px 4px;
+  border-radius: 4px;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.project-drag-hint {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 6px 12px;
+  font-size: var(--fs-meta);
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--scope-soft);
+  border-top: 2px solid var(--accent);
+}
+.project-order-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 10px 10px 0;
+  padding: 7px 6px 7px 9px;
+  border: 1px solid var(--banner-line);
+  border-radius: 4px;
+  background: var(--banner-bg);
+  color: var(--text);
+  font-size: var(--fs-meta);
+  line-height: 1.45;
+}
+.project-order-error > span {
+  flex: 1;
+  min-width: 0;
+  color: var(--tone-problem);
+}
+.project-order-error .icon-button {
+  padding: 2px;
+  color: inherit;
+}
+.tree-root .root-remove {
+  flex-shrink: 0;
+  padding: 4px;
+}
+.root-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+.root-menu summary {
+  display: flex;
+  cursor: pointer;
+  list-style: none;
+  padding: 4px;
+  border-radius: 4px;
+  color: var(--muted);
+}
+.root-menu summary::-webkit-details-marker {
+  display: none;
+}
+.root-menu summary:hover,
+.root-menu[open] summary {
+  background: var(--scope-soft);
+  color: var(--text);
+}
+.root-menu summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.root-menu > div {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 168px;
+}
+/* The tool bar's "Mais" menu shares the look of the project actions; it is fixed above its button. */
+.root-menu > div,
+.dock-menu {
+  z-index: 30;
+  padding: 5px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px #0004;
+}
+.root-menu button,
+.dock-menu button {
+  width: 100%;
+  justify-content: flex-start;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: var(--fs-meta);
+  padding: 7px 8px;
+}
+.root-menu button:hover,
+.dock-menu button:hover,
+.dock-menu button:focus-visible {
+  background: var(--scope-soft);
+}
+.root-menu button:disabled {
+  opacity: 0.4;
+}
+.dock-menu {
+  width: 240px;
+}
+.dock-menu button {
+  gap: 8px;
+  font-size: var(--fs-ui);
+}
+.dock-menu kbd {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+
+html .removed-notice {
+  gap: 2px;
+  padding-left: 7px;
+  font-size: var(--fs-meta);
+  color: var(--text);
+}
+html .removed-notice > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html .removed-notice > button:not(.icon-button) {
+  flex-shrink: 0;
+  margin-left: 4px;
+  padding: 3px 7px;
+  font-size: var(--fs-meta);
+}
+
+/* The button of an action that erases (the verb of a confirmation): the one element in brick red. */
+button.danger {
+  background: #a3361f;
+  color: #fff;
+  border-color: #a3361f;
+}
+button.danger:hover {
+  background: #86291a;
+  border-color: #86291a;
+}
+html[data-theme='dark'] button.danger {
+  background: #7a2a1c;
+  color: #ffe9e2;
+  border-color: #b0533c;
+}
+html[data-theme='dark'] button.danger:hover {
+  background: #923522;
+  color: #fff;
+}
+/* Home: the list of projects, with the rows and columns of the Structure (structure.css) and one more
+   column at the end for the ×. The two actions stay above; the list scrolls under its header of columns. */
+html .home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 16px 18px 0;
+  /* The list sits on the page, not in a box: one surface. */
+  background: var(--surface);
+}
+html .home > .welcome-actions {
+  margin: 0 0 14px;
+}
+.home-list .structure-grid,
+.home-list .structure-row {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 11rem) 5.25rem 5.25rem 5.25rem 24px;
+}
+@container (max-width: 640px) {
+  .home-list .structure-grid,
+  .home-list .structure-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 8rem) 4.5rem 4.5rem 4.75rem 24px;
+  }
+}
+@container (max-width: 460px) {
+  .home-list .structure-grid,
+  .home-list .structure-row {
+    grid-template-columns: minmax(0, 1fr) 4.25rem 4.25rem 4.5rem 24px;
+  }
+}
+.home-list .structure-row {
+  cursor: pointer;
+}
+/* The 2 px at the left of a row of the Structure are room for the mark of a selection; the border colour
+   of the dark theme (dark.css paints every border) must not draw them as a line here. */
+.home-list :is(.structure-row, .structure-grid) {
+  border-left-color: transparent;
+}
+.home-list .structure-row.is-unavailable {
+  cursor: default;
+}
+.home-list .structure-row.is-closed .structure-open svg {
+  color: var(--muted);
+}
+/* The folder of a project, cut at the start so its end stays visible; the whole path is in the tooltip. */
+.home-list .home-path {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: rtl;
+  text-align: left;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+.home-list .home-path > bdi {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.home-list .home-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+/* The × of a row: the icon buttons of the view headers (map-workspace.css, .pane-actions). */
+:is(.home-list, .saved-case) .forget-button {
+  padding: 5px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+}
+:is(.home-list, .saved-case) .forget-button:hover {
+  background: var(--scope-soft);
+  color: var(--text);
+}
+.home-list .home-group {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  margin-top: 6px;
+  padding: 4px 10px 4px 10px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+@media (max-height: 550px) {
+  html .home {
+    padding-top: 10px;
+  }
+  html .home > .welcome-actions {
+    margin-bottom: 8px;
+  }
+  .home-list .home-group {
+    min-height: 24px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+}
+
+/* The small dialog of a confirmation: the question as its title, short sentences, Cancel and the verb. */
+html .modal.small {
+  width: 420px;
+}
+.confirm-body {
+  display: grid;
+  gap: 10px;
+  padding: 0 25px;
+  color: var(--text);
+  font-size: var(--fs-ui);
+  line-height: 1.55;
+}
+.confirm-body p {
+  margin: 0;
+}
+.confirm-option label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.confirm-option input {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+}
+/* Both sentences hold the same place: checking the box changes the text, never the height. */
+.confirm-consequence {
+  display: grid;
+  margin-top: 4px !important;
+  padding-left: 23px;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+.confirm-consequence > span {
+  grid-area: 1 / 1;
+}
+.confirm-consequence > span[aria-hidden='true'] {
+  visibility: hidden;
+}

@@ -1,0 +1,95 @@
+/* Brand palette: ink, accent and paper; the other tokens derive from them. */
+:root {
+  --brand-ink: #00081b;
+  --brand-accent: #014a94;
+  --brand-paper: #f6fafd;
+  --surface: #fff;
+  --text: #172b45;
+  --muted: #526780;
+  --line: #d4dfeb;
+  --accent: var(--brand-accent);
+  --green: var(--accent);
+  --purple: #76519a;
+  --edge-color: #526f94;
+  --scope-bg: var(--brand-paper);
+  --scope-panel: var(--surface);
+  --scope-text: var(--text);
+  --scope-muted: var(--muted);
+  --scope-accent: var(--accent);
+  --scope-soft: #e7f0fa;
+  color: var(--text);
+  background: var(--brand-paper);
+}
+:root[data-theme='dark'] {
+  --surface: #0a172d;
+  --text: var(--brand-paper);
+  --muted: #abbdd2;
+  --line: #253b58;
+  --accent: #8ec5ff;
+  --green: var(--accent);
+  --purple: #c4a9e0;
+  --edge-color: #829dc0;
+  --scope-bg: var(--brand-ink);
+  --scope-panel: var(--surface);
+  --scope-text: var(--text);
+  --scope-muted: var(--muted);
+  --scope-accent: var(--accent);
+  --scope-soft: #142d4b;
+}
+html button.primary {
+  background: var(--brand-accent);
+  color: var(--brand-paper);
+  border-color: var(--brand-accent);
+}
+html button.primary:hover {
+  background: #075ead;
+}
+html :is(button, input, textarea, select):focus-visible {
+  outline-color: var(--accent);
+}
+html .convention-toggle input {
+  accent-color: var(--accent);
+}
+html .contextual-canvas {
+  --surface: var(--scope-panel);
+  --text: var(--scope-text);
+}
+.canvas-legend .green,
+.file-tile.entry .kind-dot {
+  background: var(--accent);
+}
+.canvas-legend .purple {
+  background: var(--purple);
+}
+html[data-theme='light'] :is(.canvas-wrap, .trace-bar, .welcome) {
+  background-color: var(--brand-paper);
+}
+html[data-theme='light'] .file-tile.focused {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px #014a9420;
+}
+html[data-theme='light'] .file-tile.entry {
+  border-top-color: var(--brand-accent);
+}
+html[data-theme='light']
+  :is(
+    .tile-path,
+    .tile-foot,
+    .root-path,
+    .relation-target small,
+    .inspector-identity > p,
+    .file-status,
+    .empty-small,
+    .note-editor p,
+    .source-code > div > span
+  ) {
+  color: var(--muted);
+}
+html[data-theme='dark'] .react-flow {
+  --xy-background-color: var(--brand-ink);
+  background: var(--brand-ink);
+}
+html[data-theme='light'] .react-flow {
+  --xy-background-color: var(--brand-paper);
+  background: var(--brand-paper);
+}

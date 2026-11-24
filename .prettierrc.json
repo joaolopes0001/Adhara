@@ -1,0 +1,7 @@
+{
+  "singleQuote": true,
+  "semi": true,
+  "printWidth": 100,
+  "trailingComma": "all",
+  "overrides": [{ "files": "src/i18n/pt-BR.ts", "options": { "quoteProps": "consistent" } }]
+}

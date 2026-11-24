@@ -1,0 +1,373 @@
+/* A map is its header line, then its area: nothing with text but the cards and the labels of the
+   arrows is drawn over the area. */
+.contextual-canvas {
+  display: flex;
+  flex-direction: column;
+}
+.contextual-canvas > .map-area {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+/* The header line (MapHeader.tsx): the place and the height of the header of the Estrutura (30 px and
+   its 1 px line; 24 px in a low window), one line that never wraps. What has no room leaves whole for
+   the "…" at its end, as in the top bar; the name gives way last, with an ellipsis. */
+html .contextual-canvas > .map-head {
+  position: relative;
+  z-index: 6;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 31px;
+  padding: 0 8px 0 10px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+  overflow-x: clip;
+}
+html .map-head > .canvas-caption {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+html .map-head .map-head-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--text);
+}
+html .map-head .map-head-label > svg {
+  color: var(--muted);
+}
+html .map-head .map-head-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+html .map-head .map-head-count {
+  flex: none;
+}
+/* Out of the line: still measured, out of view and of the keyboard; the "…" menu lists it. */
+html .map-head [data-hidden] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+/* The buttons of the line are the quiet buttons of the top bar: icon and name, a soft fill on hover. */
+html .map-head > :is(.canvas-legend, .map-zoom, .map-tool, .map-more) {
+  flex: none;
+}
+html[data-theme] .map-head :is(.map-tool, .canvas-legend > summary, .map-more .bar-menu) {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  min-height: 24px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text);
+  font-size: var(--fs-meta);
+  line-height: 1;
+  cursor: pointer;
+}
+html[data-theme]
+  .map-head
+  :is(.map-tool:not(:disabled), .canvas-legend > summary, .map-more .bar-menu):hover {
+  background: var(--scope-soft);
+}
+html[data-theme]
+  .map-head
+  :is(.map-tool, .canvas-legend > summary, .map-more .bar-menu):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+html[data-theme] .map-head .map-more .bar-menu.active {
+  background: var(--scope-soft);
+  color: var(--accent);
+}
+html .map-head .canvas-legend > summary {
+  list-style: none;
+}
+html .map-head .canvas-legend > summary::-webkit-details-marker {
+  display: none;
+}
+/* Several views or a narrow map: the legend is its icon until it is opened. */
+:is(.scope-pane.parallel, .contextual-canvas.compact-context) .canvas-legend-label {
+  display: none;
+}
+html .map-head .canvas-legend {
+  position: relative;
+}
+html .map-head .canvas-legend > div {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted);
+  white-space: nowrap;
+}
+html .map-head .canvas-legend > div > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+html .map-head .canvas-legend > div > small {
+  font-size: var(--fs-meta);
+}
+/* The credit of the library that draws the map: the last line of the legend. */
+html .map-head .canvas-legend > div > a {
+  color: var(--muted);
+  text-underline-offset: 2px;
+}
+/* − 100% +: one group with the outline of the Estrutura | Mapa switch. */
+html .map-head .map-zoom {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+html[data-theme] .map-head .map-zoom .map-tool {
+  justify-content: center;
+  width: 24px;
+  margin: -1px 0;
+  padding: 0;
+}
+html .map-head .map-zoom-level {
+  min-width: 34px;
+  text-align: center;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+/* A 1 px line in the gap between the legend, the zoom, "Enquadrar" and "Focar seleção". */
+html .map-head > :is(.map-zoom, .map-fit, .focus-selection):not([data-hidden]) {
+  position: relative;
+}
+html .map-head > :is(.map-zoom, .map-fit, .focus-selection)::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: -5px;
+  width: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+html .map-head > .map-zoom::before {
+  top: 4px;
+  bottom: 4px;
+  left: -6px;
+}
+/* Part of the map out of view: "Enquadrar" in the colour and with the underline of a link. */
+html[data-theme] .map-head .map-fit.canvas-offscreen {
+  color: var(--accent);
+}
+html[data-theme] .map-head .map-fit.canvas-offscreen > span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+html[data-theme] .map-head .map-fit.canvas-offscreen:hover > span {
+  text-decoration-thickness: 2px;
+}
+@media (max-height: 550px) {
+  html .contextual-canvas > .map-head {
+    height: 25px;
+  }
+}
+.contextual-canvas .canvas-lanes {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 440px;
+  margin: 25px 40px 0;
+  color: var(--muted, #71829b);
+  font-size: var(--fs-meta);
+}
+.contextual-canvas .root-path {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 25px;
+}
+.contextual-canvas .root-tile {
+  height: 100%;
+}
+.contextual-canvas .file-tile {
+  overflow: visible;
+  position: relative;
+}
+/* "Abrir inspetor" on the selected tile while the inspector is closed: a link inside its footer, left of
+   the counts. Its 24 px target grows into the padding of the footer, so the tile keeps its size. */
+.contextual-canvas .file-tile .tile-foot {
+  gap: 8px;
+}
+html[data-theme] .contextual-canvas .file-tile .tile-inspect {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  min-height: 24px;
+  margin: -6px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--accent);
+  font-size: var(--fs-meta);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+html[data-theme] .contextual-canvas .file-tile .tile-inspect:hover {
+  background: transparent;
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+/* A state beside the link gives way first, with an ellipsis. */
+.contextual-canvas .file-tile .tile-inspect + span:not(:last-child) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.contextual-canvas .react-flow__handle {
+  width: 4px;
+  height: 4px;
+  min-width: 4px;
+  min-height: 4px;
+  background: var(--accent, #26b5db);
+}
+.contextual-canvas .relation-bundle {
+  position: absolute;
+  pointer-events: all;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 4px 7px;
+  border: 1px solid var(--edge-color, #648ca7);
+  border-radius: 4px;
+  background: var(--surface, #fff);
+  color: var(--text, #21344d);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+  box-shadow: 0 1px 4px #0002;
+}
+.contextual-canvas .relation-bundle:hover,
+.contextual-canvas .relation-bundle:focus-visible {
+  outline: 2px solid var(--accent, #26b5db);
+}
+.contextual-canvas .trace-bundle {
+  border-color: var(--purple, #8988f5);
+}
+.contextual-canvas .canvas-evidence-picker {
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  right: 14px;
+  width: min(390px, calc(100% - 28px));
+  max-height: calc(100% - 16px);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface, #fff);
+  color: var(--text, #21344d);
+  border: 1px solid var(--line, #ccd8e5);
+  box-shadow: 0 8px 35px #0005;
+  border-radius: 6px;
+  padding: 12px;
+}
+/* The title and the two paths keep their height: only the list under them gives way and scrolls. */
+.contextual-canvas .canvas-evidence-picker > header,
+.contextual-canvas .canvas-evidence-picker > p {
+  flex-shrink: 0;
+}
+.contextual-canvas .canvas-evidence-picker header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: var(--fs-ui);
+}
+.contextual-canvas .canvas-evidence-picker header button {
+  padding: 4px;
+  display: flex;
+}
+.contextual-canvas .canvas-evidence-picker p {
+  margin: 5px 0;
+  font:
+    var(--fs-meta) ui-monospace,
+    monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.contextual-canvas .canvas-evidence-picker > div {
+  overflow-y: auto;
+  min-height: 0;
+  margin-top: 7px;
+}
+.contextual-canvas .canvas-evidence-picker > div > button {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  gap: 5px;
+  width: 100%;
+  padding: 10px 5px;
+  border: 0;
+  border-top: 1px solid var(--line, #ccd8e5);
+  border-radius: 0;
+}
+.contextual-canvas .canvas-evidence-picker strong {
+  font-size: var(--fs-meta);
+}
+.contextual-canvas .canvas-evidence-picker small,
+.contextual-canvas .canvas-evidence-picker button span {
+  font-size: var(--fs-meta);
+  overflow-wrap: anywhere;
+}
+/* The excerpt of a reference starts at its first character, at the left, and is cut only at the end of
+   its third line: a link early in the line (where it usually is) stays in view. */
+.contextual-canvas .canvas-evidence-picker .evidence-excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  white-space: normal;
+}
+html[data-theme='dark'] .contextual-canvas {
+  --surface: #111e31;
+  --text: #dce8f5;
+  --line: #2e4059;
+}
+.contextual-canvas.compact-context .canvas-lanes {
+  grid-auto-columns: 280px;
+  margin-left: 110px;
+  font-size: var(--fs-meta);
+}
+.contextual-canvas.compact-context .root-title {
+  padding-left: 15px;
+}
+.contextual-canvas.compact-context .root-title span {
+  max-width: 175px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.contextual-canvas .react-flow {
+  background: var(--scope-bg, #f6fafd);
+}

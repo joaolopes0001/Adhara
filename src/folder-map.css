@@ -1,0 +1,319 @@
+/* The map of a folder (src/FolderMap.tsx). It reuses the card of the map (.file-tile, .tile-name,
+   .tile-foot), the label of an arrow (.relation-bundle), the footer of a view (.scope-crossing), the
+   evidence picker and the note of a partial reading (.structure-listing); only sizes are set here. */
+
+/* The strip of items without references takes its own place under the map, never over it (the area of
+   the map and the header line above it are in canvas.css). */
+
+.contextual-canvas .file-tile.item-tile {
+  height: 100%;
+  overflow: hidden;
+}
+.contextual-canvas .item-tile .tile-name {
+  align-items: center;
+  min-width: 0;
+  padding: 9px 12px 0;
+}
+.contextual-canvas .item-tile .tile-name svg {
+  flex-shrink: 0;
+}
+.contextual-canvas .item-tile .tile-name strong {
+  min-width: 0;
+}
+.contextual-canvas .item-tile .tile-name .tile-kind {
+  margin-left: auto;
+  padding: 0;
+}
+.contextual-canvas .item-tile .tile-foot {
+  gap: 8px;
+  padding: 5px 12px;
+}
+.contextual-canvas .item-tile .item-facts {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.contextual-canvas .item-tile .tile-foot > span:last-child {
+  flex-shrink: 0;
+}
+/* A card without ↙ ↗ (a map without arrows between the items): its facts stay at the left, cut with an
+   ellipsis like beside the sums. */
+.contextual-canvas .item-tile .tile-foot > .item-facts {
+  display: block;
+  flex-shrink: 1;
+  margin-left: 0;
+}
+.contextual-canvas .item-tile .react-flow__handle {
+  opacity: 0;
+  pointer-events: none;
+}
+/* The card with the keyboard focus: the ring of the controls, in the gap around the card. */
+.contextual-canvas.folder-map .react-flow__node-file:focus-visible {
+  outline: 2px solid var(--accent, #26b5db);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.contextual-canvas .react-flow__node-lane {
+  pointer-events: none;
+  cursor: default;
+}
+.contextual-canvas .folder-lane {
+  color: var(--muted);
+  font-size: var(--fs-meta);
+  white-space: nowrap;
+}
+
+/* The room the lanes take outside the columns: a node without content, only for the framing. */
+.contextual-canvas .react-flow__node-room {
+  pointer-events: none;
+  visibility: hidden;
+}
+.contextual-canvas .folder-lane-room {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* The arrows. The head has one size for every width of line (src/folderMap.ts, ARROW_HEAD). */
+.contextual-canvas .folder-arrow-head {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.contextual-canvas .folder-arrow-head path {
+  fill: var(--edge-color, #648ca7);
+}
+.contextual-canvas .folder-arrow .react-flow__edge-path {
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+/* With a card or an arrow in focus, the other arrows step back and their numbers leave. */
+.contextual-canvas.folder-map .react-flow__edge {
+  transition: opacity 120ms ease-out;
+}
+.contextual-canvas.folder-map .react-flow__edge.faded {
+  opacity: 0.16;
+}
+/* The number of an arrow: the label of an arrow of the map, in the box the layout keeps for it
+   (src/folderMap.ts, numberWidth and NUMBER_HEIGHT). */
+.contextual-canvas .relation-bundle.folder-arrow-count {
+  justify-content: center;
+  padding: 0;
+  border-radius: 3px;
+  box-shadow: none;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 120ms ease-out;
+}
+.contextual-canvas .folder-arrow-count.faded {
+  visibility: hidden;
+}
+/* A number without a free place at rest shows with its arrow in focus, over the faded ones. */
+.contextual-canvas .folder-arrow-count.quiet {
+  visibility: hidden;
+}
+.contextual-canvas .folder-arrow-count.quiet.lit {
+  visibility: visible;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .contextual-canvas.folder-map .react-flow__edge,
+  .contextual-canvas .relation-bundle.folder-arrow-count {
+    transition: none;
+  }
+}
+
+/* "Outside this folder" and "From outside this folder": cards of the map. Each row has the fixed height
+   that src/folderMap.ts (OUTSIDE_BOX) counts, so a box takes exactly the place the layout keeps for it. */
+.contextual-canvas .file-tile.outside-box {
+  height: 100%;
+  padding: 10px 0;
+  overflow: hidden;
+}
+.contextual-canvas .outside-box .tile-name {
+  flex-shrink: 0;
+  align-items: center;
+  height: 24px;
+  padding: 0 12px;
+}
+.contextual-canvas .outside-total {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+html[data-theme] .contextual-canvas .outside-box .outside-group,
+html[data-theme] .contextual-canvas .outside-box .inbound-group {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: stretch;
+  gap: 0;
+  margin-top: 6px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  white-space: nowrap;
+}
+html[data-theme] .contextual-canvas .outside-box .outside-group:hover,
+html[data-theme] .contextual-canvas .outside-box .inbound-group:hover {
+  background: var(--scope-soft);
+}
+.contextual-canvas .outside-group > span,
+.contextual-canvas .inbound-group > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.contextual-canvas .outside-group .outside-kind,
+.contextual-canvas .inbound-group .outside-kind {
+  height: 20px;
+  line-height: 20px;
+  color: var(--text);
+  font-size: var(--fs-meta);
+  font-weight: 600;
+}
+.contextual-canvas .outside-group .tile-path,
+.contextual-canvas .inbound-group .tile-path {
+  height: 17px;
+  padding: 0;
+  line-height: 17px;
+}
+.contextual-canvas .outside-group .outside-more,
+.contextual-canvas .inbound-group .outside-more {
+  height: 16px;
+  line-height: 16px;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+.contextual-canvas .outside-group .outside-from,
+.contextual-canvas .inbound-group .outside-from {
+  height: 18px;
+  line-height: 18px;
+  color: var(--muted);
+  font-size: var(--fs-meta);
+}
+
+/* A folder without items: one sentence where the map would be. It fills the area
+   and scrolls inside it, never over the line under the map; in a low view the space above the sentence
+   gives way first (56 px from the top, 32 px at least). */
+.contextual-canvas .folder-map-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  overflow: auto;
+  padding: 16px 24px 24px;
+  color: var(--muted);
+  font-size: var(--fs-ui);
+  text-align: center;
+}
+.contextual-canvas .folder-map-empty::before {
+  content: '';
+  flex: 0 1 24px;
+}
+.contextual-canvas .folder-map-empty p {
+  margin: 0;
+}
+.contextual-canvas .folder-map-empty .outside-box {
+  position: relative;
+  flex-shrink: 0;
+  width: 252px;
+  height: auto;
+  color: var(--text);
+  text-align: left;
+}
+
+.contextual-canvas .folder-strip {
+  display: flex;
+  align-items: flex-start;
+  max-height: 34%;
+  overflow: auto;
+  padding: 4px 12px;
+  color: var(--scope-muted);
+  font-size: var(--fs-meta);
+}
+.contextual-canvas .folder-strip-body {
+  display: flex;
+  flex: 1 1 0;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 16px;
+  min-width: 0;
+}
+.contextual-canvas .folder-strip-folded {
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.contextual-canvas .folder-strip-summary {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html[data-theme] .contextual-canvas .folder-strip button.folder-strip-fold {
+  flex: none;
+  justify-content: center;
+  width: 24px;
+  margin: 0 4px 0 -6px;
+  padding: 0;
+  color: var(--scope-muted);
+  text-decoration: none;
+}
+html[data-theme] .contextual-canvas .folder-strip button.folder-strip-fold:hover {
+  color: var(--scope-text);
+}
+.contextual-canvas .folder-strip-line {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 14px;
+  min-width: 0;
+}
+.contextual-canvas .folder-strip-label {
+  font-weight: 600;
+  color: var(--scope-text);
+}
+html[data-theme] .contextual-canvas .folder-strip button {
+  gap: 4px;
+  min-height: 24px;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--scope-accent);
+  font-size: var(--fs-meta);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+html[data-theme] .contextual-canvas .folder-strip button:hover {
+  text-decoration-thickness: 2px;
+}
+.contextual-canvas .folder-strip button svg {
+  align-self: center;
+}
+.contextual-canvas .folder-strip button small {
+  color: var(--scope-muted);
+  font-size: var(--fs-meta);
+}
+.contextual-canvas .folder-strip-legend {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.contextual-canvas .folder-strip-undrawn {
+  white-space: nowrap;
+}
+/* The partial reading stays whole after the name of the map, which gives way first. */
+.contextual-canvas .canvas-caption .folder-partial {
+  flex: none;
+  margin-left: 4px;
+}

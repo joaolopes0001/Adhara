@@ -1,0 +1,16 @@
+node_modules/
+dist/
+__pycache__/
+*.tsbuildinfo
+test-results/
+playwright-report/
+.local-state/
+.agents/
+.codex/
+.env
+.env.*
+!.env.example
+*.log
+# Configuração pessoal do Claude Code, fora do versionamento
+CLAUDE.local.md
+.claude/settings.local.json

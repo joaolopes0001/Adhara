@@ -1,0 +1,1215 @@
+{
+ "observations": [
+  {
+   "code": "symlink",
+   "id": "242eb72b385e70883bd6",
+   "key": "0924b857adcbb645",
+   "kind": "issues",
+   "line": null,
+   "message": "Link simbólico listado sem seguir seu destino.",
+   "node": "/aae-state-before-english/projeto/atalho.md",
+   "target": null
+  },
+  {
+   "code": "unreadable",
+   "id": "73d34cec457857904689",
+   "key": "f8b4baa179b45da9",
+   "kind": "issues",
+   "line": null,
+   "message": "Não foi possível analisar: 'utf-8' codec can't decode byte 0xe9 in position 3: invalid continuation byte",
+   "node": "/aae-state-before-english/projeto/docs/latin.md",
+   "target": null
+  },
+  {
+   "code": "broken",
+   "id": "6c335397f4d33fa56613",
+   "key": "8cc63c9e0c956582",
+   "kind": "issues",
+   "line": 2,
+   "message": "Destino não encontrado: docs/falta.md",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": "docs/falta.md"
+  },
+  {
+   "code": "broken",
+   "id": "39c10a8d16fba27045ce",
+   "key": "341f0f482a1bfaff",
+   "kind": "issues",
+   "line": 2,
+   "message": "Destino não encontrado: wiki-falta",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": "wiki-falta"
+  },
+  {
+   "code": "unresolved-name",
+   "id": "f198797520aba7bcaf2c",
+   "key": "f7896dbf41b6cb73",
+   "kind": "issues",
+   "line": 2,
+   "message": "Nome citado sem diretório não corresponde a nenhum arquivo do inventário: fantasma.md. Pode ser artefato de execução, exemplo ou marcador; não é tratado como caminho quebrado.",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": "fantasma.md"
+  },
+  {
+   "code": "ambiguous",
+   "id": "1dc418efb8dc3e6c8189",
+   "key": "8690ded01f50d331",
+   "kind": "issues",
+   "line": 3,
+   "message": "Referência ambígua: comum.md (2 candidatos no inventário; nenhum foi escolhido).",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": "comum.md"
+  },
+  {
+   "code": "outside-root",
+   "id": "6c635f00e2c34810fd84",
+   "key": "e61af88e9481eda6",
+   "kind": "issues",
+   "line": 6,
+   "message": "A referência compartilhado/acima.md não resolve dentro do diretório aberto, mas o destino existe no mesmo repositório (o de base, com .git), fora do diretório aberto: no ancestral base (.., 1 nível acima do diretório aberto), em ../compartilhado/acima.md. Se este diretório é usado sozinho, a referência está quebrada; se é usado dentro do repositório, abra a raiz dele.",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": "compartilhado/acima.md"
+  },
+  {
+   "code": "broken",
+   "id": "7f0ddf7a2747bfa9a362",
+   "key": "f167fd7c8d31243d",
+   "kind": "issues",
+   "line": 2,
+   "message": "Destino não encontrado: sumiu.md",
+   "node": "/aae-state-before-english/vizinho/AGENTS.md",
+   "target": "sumiu.md"
+  },
+  {
+   "code": "manifest",
+   "id": "4df443904e2a9339e4df",
+   "key": "2afbeb8e2b50c17e",
+   "kind": "issues",
+   "line": null,
+   "message": "Manifesto inválido: objects e relationships devem ser listas.",
+   "node": "/aae-state-before-english/projeto/ruim/agent-architecture.json",
+   "target": null
+  },
+  {
+   "code": "manifest-mismatch",
+   "id": "df344c31788fddbfb649",
+   "key": "78644bbc6b95a734",
+   "kind": "issues",
+   "line": 1,
+   "message": "Relação do manifesto sem link no arquivo de origem: b.md → a.md. Com linkedRelationships, cada relação tem um link explícito do arquivo de origem para o destino, fora de bloco de código.",
+   "node": "/aae-state-before-english/projeto/pacote/agent-architecture.json",
+   "target": "b.md → a.md"
+  },
+  {
+   "code": "manifest-mismatch",
+   "id": "00ed8b899d3c749eba56",
+   "key": "bc29a5a784263319",
+   "kind": "issues",
+   "line": 1,
+   "message": "Link sem relação no manifesto agent-architecture.json: b.md. Com linkedRelationships, cada link explícito entre dois objetos do manifesto é uma relação dele.",
+   "node": "/aae-state-before-english/projeto/pacote/a.md",
+   "target": "b.md"
+  },
+  {
+   "code": "scope-unused-pattern",
+   "id": "f904483739b1c07188d2",
+   "key": "079131e0e2a4929e",
+   "kind": "issues",
+   "line": null,
+   "message": "Padrão de escopo sem efeito (runtimeWorkspace: nunca/): nenhuma referência absorvida e nenhum arquivo inventariado casou. Revise ou remova a declaração.",
+   "node": "/aae-state-before-english/vizinho/agent-architecture.json",
+   "target": null
+  },
+  {
+   "code": "unreachable",
+   "id": "283f50b730423ca5c9fa",
+   "key": "8fb78335f94dbde3",
+   "kind": "issues",
+   "line": null,
+   "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 1 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+   "node": "/aae-state-before-english/projeto/ilha/i1.md",
+   "target": null
+  },
+  {
+   "code": "unreachable",
+   "id": "83da2c8e8df47fe72936",
+   "key": "8726591d0a986802",
+   "kind": "issues",
+   "line": null,
+   "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 1 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+   "node": "/aae-state-before-english/projeto/ilha/i2.md",
+   "target": null
+  },
+  {
+   "code": "unreachable",
+   "id": "bb199ad601826248b0ad",
+   "key": "4781e030bddf00e2",
+   "kind": "issues",
+   "line": null,
+   "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+   "node": "/aae-state-before-english/projeto/ruim/nota.md",
+   "target": null
+  },
+  {
+   "code": "unreachable",
+   "id": "35041c14c7d53b37794b",
+   "key": "3b717ccdc4f08dbb",
+   "kind": "issues",
+   "line": null,
+   "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+   "node": "/aae-state-before-english/projeto/solto.md",
+   "target": null
+  },
+  {
+   "code": "unreachable",
+   "id": "0ddcd2b9f6f84a54562f",
+   "key": "96cb985d77a650bb",
+   "kind": "issues",
+   "line": null,
+   "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+   "node": "/aae-state-before-english/projeto/x/comum.md",
+   "target": null
+  },
+  {
+   "code": "unreachable",
+   "id": "f906867f89a44ec2d323",
+   "key": "664c576abe5bd24d",
+   "kind": "issues",
+   "line": null,
+   "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+   "node": "/aae-state-before-english/projeto/y/comum.md",
+   "target": null
+  },
+  {
+   "code": "repeated-reference",
+   "id": "f6c7ac4792faa66616c3",
+   "key": "d382cf0b4cdb851e",
+   "kind": "signals",
+   "line": 4,
+   "message": "Referência repetida em 2 locais de evidência: AGENTS.md → /aae-state-before-english/projeto/docs/b.md. Pode ser intencional; não comprova ruído de execução.",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": null
+  },
+  {
+   "code": "high-fanout",
+   "id": "f6496e008b683a11abdc",
+   "key": "474fd434378d833e",
+   "kind": "signals",
+   "line": null,
+   "message": "Concentração de referências: 22 destinos explícitos distintos (limiar: 12). Revise a organização; quantidade não comprova ineficiência.",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": null
+  },
+  {
+   "code": "cycle",
+   "id": "2fb41826a17e066c5950",
+   "key": "32eb8fc6378d691f",
+   "kind": "signals",
+   "line": 1,
+   "message": "Ciclo estrutural: 2 arquivo(s) em um grupo com retorno por referências explícitas (i1.md, i2.md). Não comprova repetição na execução de um agente.",
+   "node": "/aae-state-before-english/projeto/ilha/i1.md",
+   "target": null
+  },
+  {
+   "code": "cycle",
+   "id": "e9567ddec249a458a368",
+   "key": "e35f824cd565cf0b",
+   "kind": "signals",
+   "line": 4,
+   "message": "Ciclo estrutural: 3 arquivo(s) em um grupo com retorno por referências explícitas (AGENTS.md, b.md, c.md). Não comprova repetição na execução de um agente.",
+   "node": "/aae-state-before-english/projeto/AGENTS.md",
+   "target": null
+  },
+  {
+   "code": "cycle",
+   "id": "d65d9e3b0ff3e2b44146",
+   "key": "0c37c0c438068fd0",
+   "kind": "signals",
+   "line": 1,
+   "message": "Ciclo estrutural: 2 arquivo(s) em um grupo com retorno por referências explícitas (a.md, b.md). Não comprova repetição na execução de um agente.",
+   "node": "/aae-state-before-english/projeto/pacote/a.md",
+   "target": null
+  }
+ ],
+ "references": {
+  "/aae-state-before-english/projeto": {
+   "format": 1,
+   "kind": "aae-reference",
+   "reference": {
+    "at": "2026-11-17T10:00:00-03:00",
+    "audit": {
+     "findings": [
+      {
+       "code": "analysis-partial",
+       "id": "36efb3cd5e8aa37d",
+       "message": "Inventário ou análise parcial: ausência de achados ou de caminhos não é conclusiva.",
+       "severity": "incomplete"
+      },
+      {
+       "code": "unreadable",
+       "id": "f8b4baa179b45da9",
+       "message": "Não foi possível analisar: 'utf-8' codec can't decode byte 0xe9 in position 3: invalid continuation byte",
+       "path": "docs/latin.md",
+       "severity": "incomplete"
+      },
+      {
+       "code": "broken",
+       "form": "word",
+       "id": "341f0f482a1bfaff",
+       "line": 2,
+       "message": "Destino não encontrado: wiki-falta",
+       "path": "AGENTS.md",
+       "severity": "warning",
+       "syntax": "wiki",
+       "target": "wiki-falta"
+      },
+      {
+       "code": "broken",
+       "form": "path",
+       "id": "8cc63c9e0c956582",
+       "line": 2,
+       "message": "Destino não encontrado: docs/falta.md",
+       "path": "AGENTS.md",
+       "severity": "warning",
+       "syntax": "markdown",
+       "target": "docs/falta.md"
+      },
+      {
+       "ancestor": "..",
+       "code": "outside-root",
+       "form": "path",
+       "id": "e61af88e9481eda6",
+       "legacyId": "55d58273eb8ce22a",
+       "levels": 1,
+       "line": 6,
+       "message": "A referência compartilhado/acima.md não resolve dentro do diretório aberto, mas o destino existe no mesmo repositório (o de base, com .git), fora do diretório aberto: no ancestral base (.., 1 nível acima do diretório aberto), em ../compartilhado/acima.md. Se este diretório é usado sozinho, a referência está quebrada; se é usado dentro do repositório, abra a raiz dele.",
+       "path": "AGENTS.md",
+       "severity": "warning",
+       "syntax": "path",
+       "target": "compartilhado/acima.md"
+      },
+      {
+       "absent": "relation",
+       "code": "manifest-mismatch",
+       "from": "pacote/a.md",
+       "id": "bc29a5a784263319",
+       "line": 1,
+       "manifest": "pacote/agent-architecture.json",
+       "message": "Link sem relação no manifesto agent-architecture.json: b.md. Com linkedRelationships, cada link explícito entre dois objetos do manifesto é uma relação dele.",
+       "path": "pacote/a.md",
+       "severity": "warning",
+       "syntax": "markdown",
+       "target": "b.md",
+       "to": "pacote/b.md"
+      },
+      {
+       "absent": "link",
+       "code": "manifest-mismatch",
+       "from": "pacote/b.md",
+       "id": "78644bbc6b95a734",
+       "line": 1,
+       "manifest": "pacote/agent-architecture.json",
+       "message": "Relação do manifesto sem link no arquivo de origem: b.md → a.md. Com linkedRelationships, cada relação tem um link explícito do arquivo de origem para o destino, fora de bloco de código.",
+       "path": "pacote/agent-architecture.json",
+       "severity": "warning",
+       "target": "b.md → a.md",
+       "to": "pacote/a.md"
+      },
+      {
+       "code": "manifest",
+       "id": "2afbeb8e2b50c17e",
+       "message": "Manifesto inválido: objects e relationships devem ser listas.",
+       "path": "ruim/agent-architecture.json",
+       "severity": "warning"
+      },
+      {
+       "code": "basename-resolved",
+       "id": "ab9acddcf6d95d93",
+       "line": 4,
+       "message": "Referência resolvida pelo único candidato sob a pasta da skill de origem (homônimos fora dela não contam); escreva o caminho a partir do arquivo para não depender da busca por nome.",
+       "path": ".claude/skills/uma/SKILL.md",
+       "resolvedBy": "skill-basename",
+       "resolvedTo": ".claude/skills/uma/fundo/apoio.md",
+       "severity": "info",
+       "target": "apoio.md"
+      },
+      {
+       "code": "unresolved-name",
+       "form": "name",
+       "id": "f7896dbf41b6cb73",
+       "line": 2,
+       "message": "Nome citado sem diretório não corresponde a nenhum arquivo do inventário: fantasma.md. Pode ser artefato de execução, exemplo ou marcador; não é tratado como caminho quebrado.",
+       "path": "AGENTS.md",
+       "severity": "info",
+       "syntax": "path",
+       "target": "fantasma.md"
+      },
+      {
+       "candidates": [
+        "x/comum.md",
+        "y/comum.md"
+       ],
+       "candidatesTotal": 2,
+       "code": "ambiguous",
+       "form": "name",
+       "id": "8690ded01f50d331",
+       "line": 3,
+       "message": "Referência ambígua: comum.md (2 candidatos no inventário; nenhum foi escolhido).",
+       "path": "AGENTS.md",
+       "severity": "info",
+       "syntax": "markdown",
+       "target": "comum.md"
+      },
+      {
+       "code": "symlink",
+       "id": "0924b857adcbb645",
+       "message": "Link simbólico listado sem seguir seu destino.",
+       "path": "atalho.md",
+       "severity": "info"
+      },
+      {
+       "class": "island",
+       "code": "unreachable",
+       "conclusive": false,
+       "id": "8fb78335f94dbde3",
+       "inbound": 1,
+       "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 1 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+       "path": "ilha/i1.md",
+       "severity": "info"
+      },
+      {
+       "class": "island",
+       "code": "unreachable",
+       "conclusive": false,
+       "id": "8726591d0a986802",
+       "inbound": 1,
+       "message": "Sem caminho por referência explícita a partir das entradas consideradas: referenciado apenas por 1 arquivo(s) também sem caminho. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+       "path": "ilha/i2.md",
+       "severity": "info"
+      },
+      {
+       "class": "orphan",
+       "code": "unreachable",
+       "conclusive": false,
+       "id": "4781e030bddf00e2",
+       "inbound": 0,
+       "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+       "path": "ruim/nota.md",
+       "severity": "info"
+      },
+      {
+       "class": "orphan",
+       "code": "unreachable",
+       "conclusive": false,
+       "id": "3b717ccdc4f08dbb",
+       "inbound": 0,
+       "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+       "path": "solto.md",
+       "severity": "info"
+      },
+      {
+       "class": "orphan",
+       "code": "unreachable",
+       "conclusive": false,
+       "id": "96cb985d77a650bb",
+       "inbound": 0,
+       "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+       "path": "x/comum.md",
+       "severity": "info"
+      },
+      {
+       "class": "orphan",
+       "code": "unreachable",
+       "conclusive": false,
+       "id": "664c576abe5bd24d",
+       "inbound": 0,
+       "message": "Sem caminho por referência explícita a partir das entradas consideradas: nenhum outro arquivo o referencia. Candidato a revisão: o arquivo continua localizável por busca e a ferramenta não observa execução. Não conclusivo: a leitura desta raiz é parcial (inventário cortado, texto não analisado ou relações cortadas).",
+       "path": "y/comum.md",
+       "severity": "info"
+      }
+     ],
+     "partial": true,
+     "scopeHash": null,
+     "scopeSource": null,
+     "status": "inconclusive"
+    },
+    "context": [
+     "/aae-state-before-english/projeto",
+     "/aae-state-before-english/vizinho"
+    ],
+    "files": {
+     ".claude/skills/uma/SKILL.md": {
+      "bytes": 29,
+      "sha256": "27699873b1c706d2d05e0b3daa4fa58e72db434f2abe7fe8bae102a0d97778d7"
+     },
+     ".claude/skills/uma/fundo/apoio.md": {
+      "bytes": 6,
+      "sha256": "191b414dd72f7ba68a5b65479b5331a8134a72208fd1439ec833011084895548"
+     },
+     "AGENTS.md": {
+      "bytes": 680,
+      "sha256": "7c7c68e3c1a97c7c1a82b92339e35beb53148247c1857ef80f4378f0b7f62e3d"
+     },
+     "atalho.md": {
+      "bytes": null,
+      "sha256": null
+     },
+     "docs/b.md": {
+      "bytes": 32,
+      "sha256": "6a8a7009b16e92064c8c624360857fa01dafe378ea6c7963e572fc5284c5b88e"
+     },
+     "docs/c.md": {
+      "bytes": 10,
+      "sha256": "ef4a2c90c45f7e75f4646a6af61e4cdf0e18a53066e64487234f93cc58381230"
+     },
+     "docs/latin.md": {
+      "bytes": 5,
+      "sha256": null
+     },
+     "ilha/i1.md": {
+      "bytes": 12,
+      "sha256": "6868492647341e5000b16554b1edf689a99571a00a3c8aeea5afc9e9463ef390"
+     },
+     "ilha/i2.md": {
+      "bytes": 12,
+      "sha256": "9db9c49c233eed5f47b2c8afc3989750b48b43d6bfc991d1b5f33a2999f26b1e"
+     },
+     "leque/d0.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d1.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d10.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d11.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d12.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d2.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d3.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d4.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d5.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d6.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d7.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d8.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "leque/d9.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "pacote/a.md": {
+      "bytes": 10,
+      "sha256": "ef4a2c90c45f7e75f4646a6af61e4cdf0e18a53066e64487234f93cc58381230"
+     },
+     "pacote/agent-architecture.json": {
+      "bytes": 135,
+      "sha256": "4aa2523835c293acedf3daad5ae2125cf66f87a82ef4bf95878451096ccebe5d"
+     },
+     "pacote/b.md": {
+      "bytes": 2,
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f"
+     },
+     "ruim/agent-architecture.json": {
+      "bytes": 14,
+      "sha256": "3750f23de7c162d169636ecd2f270d4ed082808efd405a162aa1e84da4a65434"
+     },
+     "ruim/nota.md": {
+      "bytes": 29,
+      "sha256": "9975612cfcc0fbd32718ac4ff135349037ae60ff4aee00fd557c0b9c9b13b0eb"
+     },
+     "solto.md": {
+      "bytes": 6,
+      "sha256": "40fc1b99dc87069cf2a83ee3b7b5a130286cbe142892c81307c12c5b85049422"
+     },
+     "x/comum.md": {
+      "bytes": 2,
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+     },
+     "y/comum.md": {
+      "bytes": 2,
+      "sha256": "3bb2abb69ebb27fbfe63c7639624c6ec5e331b841a5bc8c3ebc10b9285e90877"
+     }
+    },
+    "listed": [],
+    "name": "projeto",
+    "reader": "3ad903405f11c914",
+    "relations": [
+     {
+      "edge": "f42375d4762b29e86b3d",
+      "evidenceHash": "4e5f29c4c90879b5",
+      "kind": "markdown",
+      "line": 2,
+      "origin": "AGENTS.md",
+      "raw": "docs/falta.md",
+      "source": "AGENTS.md",
+      "status": "missing",
+      "target": "docs/falta.md"
+     },
+     {
+      "edge": "34f7215b7340b6fcd21c",
+      "evidenceHash": "4e5f29c4c90879b5",
+      "kind": "wiki",
+      "line": 2,
+      "origin": "AGENTS.md",
+      "raw": "wiki-falta",
+      "source": "AGENTS.md",
+      "status": "missing",
+      "target": "wiki-falta"
+     },
+     {
+      "edge": "53d38f1a8da8c0bca43b",
+      "evidenceHash": "4e5f29c4c90879b5",
+      "kind": "path",
+      "line": 2,
+      "origin": "AGENTS.md",
+      "raw": "fantasma.md",
+      "source": "AGENTS.md",
+      "status": "missing",
+      "target": "fantasma.md"
+     },
+     {
+      "edge": "86399e313ef79bc11251",
+      "evidenceHash": "e67eb5c2ca9ac93b",
+      "kind": "markdown",
+      "line": 4,
+      "origin": "AGENTS.md",
+      "raw": "docs/b.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "docs/b.md"
+     },
+     {
+      "edge": "f14a065e8539cc68156d",
+      "evidenceHash": "9a4a67c87f0ba66c",
+      "kind": "markdown",
+      "line": 5,
+      "origin": "AGENTS.md",
+      "raw": "docs/b.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "docs/b.md"
+     },
+     {
+      "edge": "446dbf382b1e73637aaa",
+      "evidenceHash": "f1af2bc258355d8a",
+      "kind": "path",
+      "line": 6,
+      "origin": "AGENTS.md",
+      "raw": "compartilhado/acima.md",
+      "source": "AGENTS.md",
+      "status": "external",
+      "target": "/aae-state-before-english/compartilhado/acima.md"
+     },
+     {
+      "edge": "0bd16f873dbfdac3bd08",
+      "evidenceHash": "75b82b8ce0204a68",
+      "kind": "markdown",
+      "line": 7,
+      "origin": "AGENTS.md",
+      "raw": "atalho.md",
+      "source": "AGENTS.md",
+      "status": "skipped",
+      "target": "atalho.md"
+     },
+     {
+      "edge": "7dc4ba5818d7e4cbc049",
+      "evidenceHash": "75b82b8ce0204a68",
+      "kind": "markdown",
+      "line": 7,
+      "origin": "AGENTS.md",
+      "raw": "docs/latin.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "docs/latin.md"
+     },
+     {
+      "edge": "5415a0d095ee3319d32e",
+      "evidenceHash": "54de6199ad8638e7",
+      "kind": "markdown",
+      "line": 8,
+      "origin": "AGENTS.md",
+      "raw": "pacote/agent-architecture.json",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "pacote/agent-architecture.json"
+     },
+     {
+      "edge": "a5d1ca88e9b54ddae939",
+      "evidenceHash": "54de6199ad8638e7",
+      "kind": "markdown",
+      "line": 8,
+      "origin": "AGENTS.md",
+      "raw": ".claude/skills/uma/SKILL.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": ".claude/skills/uma/SKILL.md"
+     },
+     {
+      "edge": "2492a7cfe8253febe85d",
+      "evidenceHash": "ed7bb1d71778ed47",
+      "kind": "markdown",
+      "line": 9,
+      "origin": "AGENTS.md",
+      "raw": "leque/d0.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d0.md"
+     },
+     {
+      "edge": "ab6bbc0bbc149a8e97c7",
+      "evidenceHash": "92ba676833544a07",
+      "kind": "markdown",
+      "line": 10,
+      "origin": "AGENTS.md",
+      "raw": "leque/d1.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d1.md"
+     },
+     {
+      "edge": "b53235fa1e137b323f24",
+      "evidenceHash": "dc43a97e4ad9a666",
+      "kind": "markdown",
+      "line": 11,
+      "origin": "AGENTS.md",
+      "raw": "leque/d2.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d2.md"
+     },
+     {
+      "edge": "09786eef074f85ca6fd3",
+      "evidenceHash": "5e78018702b70ec1",
+      "kind": "markdown",
+      "line": 12,
+      "origin": "AGENTS.md",
+      "raw": "leque/d3.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d3.md"
+     },
+     {
+      "edge": "48284dc3cb09879a6283",
+      "evidenceHash": "c122f86535ff4450",
+      "kind": "markdown",
+      "line": 13,
+      "origin": "AGENTS.md",
+      "raw": "leque/d4.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d4.md"
+     },
+     {
+      "edge": "864e6ea0ad44f591733c",
+      "evidenceHash": "e129fb3e5440a36b",
+      "kind": "markdown",
+      "line": 14,
+      "origin": "AGENTS.md",
+      "raw": "leque/d5.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d5.md"
+     },
+     {
+      "edge": "9225d9cdd52341bfeea3",
+      "evidenceHash": "183280ae4bd6a840",
+      "kind": "markdown",
+      "line": 15,
+      "origin": "AGENTS.md",
+      "raw": "leque/d6.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d6.md"
+     },
+     {
+      "edge": "291829c34eb860bc5adc",
+      "evidenceHash": "c1e46e6489d3a3c8",
+      "kind": "markdown",
+      "line": 16,
+      "origin": "AGENTS.md",
+      "raw": "leque/d7.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d7.md"
+     },
+     {
+      "edge": "89af2f9a698af057a159",
+      "evidenceHash": "08e0f5f288756994",
+      "kind": "markdown",
+      "line": 17,
+      "origin": "AGENTS.md",
+      "raw": "leque/d8.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d8.md"
+     },
+     {
+      "edge": "71c96e1490d0ed59651b",
+      "evidenceHash": "a7974a9073b3d560",
+      "kind": "markdown",
+      "line": 18,
+      "origin": "AGENTS.md",
+      "raw": "leque/d9.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d9.md"
+     },
+     {
+      "edge": "7b2e062641c4e485c9a5",
+      "evidenceHash": "2b319bc808d0ea1f",
+      "kind": "markdown",
+      "line": 19,
+      "origin": "AGENTS.md",
+      "raw": "leque/d10.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d10.md"
+     },
+     {
+      "edge": "60906c0bd82430bcf84e",
+      "evidenceHash": "c48d2fc0cd88a07a",
+      "kind": "markdown",
+      "line": 20,
+      "origin": "AGENTS.md",
+      "raw": "leque/d11.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d11.md"
+     },
+     {
+      "edge": "e36beceaedd7ffdff3c1",
+      "evidenceHash": "3a8e216617b85b77",
+      "kind": "markdown",
+      "line": 21,
+      "origin": "AGENTS.md",
+      "raw": "leque/d12.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "leque/d12.md"
+     },
+     {
+      "edge": "7d9a88753ca33589120a",
+      "evidenceHash": "11555bf899bcc5ac",
+      "kind": "manifest",
+      "line": 1,
+      "origin": "pacote/agent-architecture.json",
+      "raw": "a.md",
+      "source": "pacote/agent-architecture.json",
+      "status": "resolved",
+      "target": "pacote/a.md"
+     },
+     {
+      "edge": "45e49667c403d4e625d8",
+      "evidenceHash": "8b5a843999671e18",
+      "kind": "manifest",
+      "line": 1,
+      "origin": "pacote/agent-architecture.json",
+      "raw": "b.md",
+      "source": "pacote/agent-architecture.json",
+      "status": "resolved",
+      "target": "pacote/b.md"
+     },
+     {
+      "edge": "0d172acc1b25caf7c0cf",
+      "evidenceHash": "348d5adfd7a2bfeb",
+      "kind": "declared",
+      "line": 1,
+      "origin": "pacote/agent-architecture.json",
+      "raw": "references",
+      "source": "pacote/b.md",
+      "status": "resolved",
+      "target": "pacote/a.md"
+     },
+     {
+      "edge": "f52d435fe65e1b6b9d8e",
+      "evidenceHash": "6048f878aa161ca0",
+      "kind": "path",
+      "line": 4,
+      "origin": ".claude/skills/uma/SKILL.md",
+      "raw": "apoio.md",
+      "source": ".claude/skills/uma/SKILL.md",
+      "status": "resolved",
+      "target": ".claude/skills/uma/fundo/apoio.md"
+     },
+     {
+      "edge": "70c5b0e1506a2292fb4a",
+      "evidenceHash": "367dc06e9e7af82b",
+      "kind": "markdown",
+      "line": 1,
+      "origin": "docs/b.md",
+      "raw": "../AGENTS.md",
+      "source": "docs/b.md",
+      "status": "resolved",
+      "target": "AGENTS.md"
+     },
+     {
+      "edge": "76bd40b54e0b0e2c5e22",
+      "evidenceHash": "c48b22e1de180956",
+      "kind": "markdown",
+      "line": 2,
+      "origin": "docs/b.md",
+      "raw": "c.md",
+      "source": "docs/b.md",
+      "status": "resolved",
+      "target": "docs/c.md"
+     },
+     {
+      "edge": "ba04b784687fe804260b",
+      "evidenceHash": "5a354eec835e1299",
+      "kind": "markdown",
+      "line": 1,
+      "origin": "docs/c.md",
+      "raw": "b.md",
+      "source": "docs/c.md",
+      "status": "resolved",
+      "target": "docs/b.md"
+     },
+     {
+      "edge": "1d695fb0fd07a057c8dd",
+      "evidenceHash": "6316e6b4ce00f7d5",
+      "kind": "markdown",
+      "line": 1,
+      "origin": "ilha/i1.md",
+      "raw": "i2.md",
+      "source": "ilha/i1.md",
+      "status": "resolved",
+      "target": "ilha/i2.md"
+     },
+     {
+      "edge": "af84d76929bd54551142",
+      "evidenceHash": "30395bdc1c036ed1",
+      "kind": "markdown",
+      "line": 1,
+      "origin": "ilha/i2.md",
+      "raw": "i1.md",
+      "source": "ilha/i2.md",
+      "status": "resolved",
+      "target": "ilha/i1.md"
+     },
+     {
+      "edge": "8b754de8415614feb17f",
+      "evidenceHash": "5a354eec835e1299",
+      "kind": "markdown",
+      "line": 1,
+      "origin": "pacote/a.md",
+      "raw": "b.md",
+      "source": "pacote/a.md",
+      "status": "resolved",
+      "target": "pacote/b.md"
+     },
+     {
+      "edge": "6da2fe20dae307dd22eb",
+      "evidenceHash": "954218ba9bba37cc",
+      "kind": "markdown",
+      "line": 1,
+      "origin": "ruim/nota.md",
+      "raw": "agent-architecture.json",
+      "source": "ruim/nota.md",
+      "status": "resolved",
+      "target": "ruim/agent-architecture.json"
+     }
+    ],
+    "root": "/aae-state-before-english/projeto",
+    "unlisted": [],
+    "version": 1
+   },
+   "root": "/aae-state-before-english/projeto",
+   "savedAt": "2026-11-17T10:00:00-03:00"
+  },
+  "/aae-state-before-english/vizinho": {
+   "format": 1,
+   "kind": "aae-reference",
+   "reference": {
+    "at": "2026-11-17T10:00:00-03:00",
+    "audit": {
+     "findings": [
+      {
+       "code": "broken",
+       "form": "name",
+       "id": "f167fd7c8d31243d",
+       "line": 2,
+       "message": "Destino não encontrado: sumiu.md",
+       "path": "AGENTS.md",
+       "severity": "warning",
+       "syntax": "markdown",
+       "target": "sumiu.md"
+      },
+      {
+       "code": "scope-unused-pattern",
+       "id": "079131e0e2a4929e",
+       "message": "Padrão de escopo sem efeito (runtimeWorkspace: nunca/): nenhuma referência absorvida e nenhum arquivo inventariado casou. Revise ou remova a declaração.",
+       "path": "agent-architecture.json",
+       "pattern": "nunca/",
+       "scopeKind": "runtimeWorkspace",
+       "severity": "warning"
+      }
+     ],
+     "partial": false,
+     "scopeHash": "c5726cbf273e08cd7240afecb2531b7cfa78f1f51c55f8a8c87b7e3eeba5d343",
+     "scopeSource": "manifest",
+     "status": "pass"
+    },
+    "context": [
+     "/aae-state-before-english/projeto",
+     "/aae-state-before-english/vizinho"
+    ],
+    "files": {
+     "AGENTS.md": {
+      "bytes": 46,
+      "sha256": "6b8297310c7a173a81d3af9ad18a232eaddcbc79784845dd7d10622c9f16aeff"
+     },
+     "agent-architecture.json": {
+      "bytes": 57,
+      "sha256": "dce29bc3a86a7447ea0a016b0219edec2eb7a22c1e51d8a7e2a166e5c9172e0c"
+     },
+     "nota.md": {
+      "bytes": 5,
+      "sha256": "150f2a4850496ec22fce5335e5d56f1ffef5eefd0816dfd0af905a531b24fb6f"
+     }
+    },
+    "listed": [],
+    "name": "vizinho",
+    "reader": "3ad903405f11c914",
+    "relations": [
+     {
+      "edge": "584971ec33763c0a6bd7",
+      "evidenceHash": "47eef9617e6d404c",
+      "kind": "markdown",
+      "line": 2,
+      "origin": "AGENTS.md",
+      "raw": "nota.md",
+      "source": "AGENTS.md",
+      "status": "resolved",
+      "target": "nota.md"
+     },
+     {
+      "edge": "85b239ee4caecdfce0b8",
+      "evidenceHash": "47eef9617e6d404c",
+      "kind": "markdown",
+      "line": 2,
+      "origin": "AGENTS.md",
+      "raw": "sumiu.md",
+      "source": "AGENTS.md",
+      "status": "missing",
+      "target": "sumiu.md"
+     }
+    ],
+    "root": "/aae-state-before-english/vizinho",
+    "unlisted": [],
+    "version": 1
+   },
+   "root": "/aae-state-before-english/vizinho",
+   "savedAt": "2026-11-17T10:00:00-03:00"
+  }
+ },
+ "workspace": {
+  "expected": {
+   "/aae-state-before-english/projeto": {
+    "0924b857adcbb645": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "symlink",
+     "path": "atalho.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "0c37c0c438068fd0": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "cycle",
+     "path": "pacote/a.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "2afbeb8e2b50c17e": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "manifest",
+     "path": "ruim/agent-architecture.json",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "32eb8fc6378d691f": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "cycle",
+     "path": "ilha/i1.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "341f0f482a1bfaff": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "broken",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": "wiki-falta"
+    },
+    "3b717ccdc4f08dbb": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unreachable",
+     "path": "solto.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "474fd434378d833e": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "high-fanout",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "4781e030bddf00e2": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unreachable",
+     "path": "ruim/nota.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "664c576abe5bd24d": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unreachable",
+     "path": "y/comum.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "78644bbc6b95a734": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "manifest-mismatch",
+     "path": "pacote/agent-architecture.json",
+     "reason": "esperada antes do inglês",
+     "target": "b.md → a.md"
+    },
+    "8690ded01f50d331": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "ambiguous",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": "comum.md"
+    },
+    "8726591d0a986802": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unreachable",
+     "path": "ilha/i2.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "8cc63c9e0c956582": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "broken",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": "docs/falta.md"
+    },
+    "8fb78335f94dbde3": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unreachable",
+     "path": "ilha/i1.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "96cb985d77a650bb": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unreachable",
+     "path": "x/comum.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "bc29a5a784263319": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "manifest-mismatch",
+     "path": "pacote/a.md",
+     "reason": "esperada antes do inglês",
+     "target": "b.md"
+    },
+    "d382cf0b4cdb851e": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "repeated-reference",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": "docs/b.md"
+    },
+    "e35f824cd565cf0b": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "cycle",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    },
+    "e61af88e9481eda6": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "outside-root",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": "compartilhado/acima.md"
+    },
+    "f7896dbf41b6cb73": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unresolved-name",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": "fantasma.md"
+    },
+    "f8b4baa179b45da9": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "unreadable",
+     "path": "docs/latin.md",
+     "reason": "esperada antes do inglês",
+     "target": null
+    }
+   },
+   "/aae-state-before-english/vizinho": {
+    "079131e0e2a4929e": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "scope-unused-pattern",
+     "path": "agent-architecture.json",
+     "reason": "esperada antes do inglês",
+     "target": "nunca/"
+    },
+    "f167fd7c8d31243d": {
+     "at": "2026-11-17T10:00:00-03:00",
+     "code": "broken",
+     "path": "AGENTS.md",
+     "reason": "esperada antes do inglês",
+     "target": "sumiu.md"
+    }
+   }
+  },
+  "notes": {
+   "/aae-state-before-english/projeto/AGENTS.md": "Anotação feita antes do inglês: conferir o contrato.",
+   "/aae-state-before-english/projeto/docs/b.md": "Anotação feita antes do inglês: conferir o contrato."
+  },
+  "roots": [
+   "/aae-state-before-english/projeto",
+   "/aae-state-before-english/vizinho"
+  ],
+  "savedCases": [
+   "/aae-state-before-english/projeto",
+   "/aae-state-before-english/vizinho"
+  ]
+ }
+}

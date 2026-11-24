@@ -1,0 +1,254 @@
+:root {
+  --scope-bg: #f7f8fa;
+  --scope-panel: #fff;
+  --scope-text: #343c4b;
+  --scope-muted: #5e697b;
+  --scope-accent: #465fd4;
+  --scope-soft: #edf0ff;
+}
+:root[data-theme='dark'] {
+  --scope-bg: #0d1017;
+  --scope-panel: #151a25;
+  --scope-text: #e3e7f0;
+  --scope-muted: #a4aec1;
+  --scope-accent: #9faefe;
+  --scope-soft: #242e4b;
+}
+.scope-pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 100%;
+  min-width: 0;
+  min-height: 0;
+  background: var(--scope-panel);
+  color: var(--scope-text);
+}
+
+.scope-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  background: var(--scope-panel);
+  border-bottom: 1px solid var(--line);
+  gap: 8px;
+  flex-shrink: 0;
+}
+.scope-header > div {
+  min-width: 0;
+  flex: 1;
+}
+.scope-name {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--scope-text);
+  max-width: 100%;
+  justify-content: flex-start;
+}
+.scope-name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--fs-ui);
+}
+.scope-name span {
+  font-size: var(--fs-meta);
+  color: var(--scope-accent);
+  background: var(--scope-soft);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+.scope-header code {
+  display: block;
+  font:
+    var(--fs-meta) ui-monospace,
+    monospace;
+  color: var(--scope-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+.scope-parent {
+  padding: 6px 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--fs-meta);
+  color: var(--scope-muted);
+  background: var(--scope-soft);
+  flex-wrap: wrap;
+}
+.scope-parent small {
+  font-size: var(--fs-meta);
+}
+.scope-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  font-size: var(--fs-meta);
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+.scope-location > span {
+  color: var(--scope-muted);
+  font-size: var(--fs-meta);
+}
+.scope-location button {
+  display: block;
+  padding: 3px 0;
+  border: 0;
+  background: none;
+  color: var(--scope-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font:
+    var(--fs-meta) ui-monospace,
+    monospace;
+  text-align: left;
+}
+.scope-children {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  max-height: 45px;
+  color: var(--scope-muted);
+  font-size: var(--fs-meta);
+}
+.scope-children > span {
+  white-space: nowrap;
+}
+.scope-children button {
+  font-size: var(--fs-meta);
+  padding: 4px 6px;
+  background: var(--scope-soft);
+  color: var(--scope-text);
+  border-color: var(--line);
+}
+.scope-pane > .canvas-wrap {
+  min-height: 70px;
+}
+.scope-crossing {
+  flex-shrink: 0;
+  border-top: 1px solid var(--line);
+  background: var(--scope-panel);
+  min-height: 0;
+}
+.scope-crossing-toggle {
+  border: 0;
+  background: none;
+  color: var(--scope-muted);
+  font-size: var(--fs-meta);
+  padding: 8px 10px;
+  white-space: normal;
+  text-align: left;
+  justify-content: flex-start;
+  width: 100%;
+}
+.scope-crossing-list {
+  max-height: 110px;
+  overflow: auto;
+  padding: 0 10px 5px;
+}
+.scope-crossing-list > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.scope-crossing-list button {
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--scope-accent);
+  font-size: var(--fs-meta);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.scope-crossing-list > div button:not(:nth-child(2)) {
+  flex: 1;
+  text-align: left;
+}
+.scope-crossing-list > div button:nth-child(2) {
+  padding: 4px 8px;
+  flex-shrink: 0;
+}
+.breadcrumb-segments {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 3px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.breadcrumb-segments button {
+  font-size: var(--fs-meta);
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--scope-muted);
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  flex-shrink: 0;
+}
+.breadcrumb-segments button[aria-current='location'] {
+  color: var(--scope-text);
+  font-weight: 600;
+}
+.tree-directory-row {
+  display: flex;
+  align-items: center;
+}
+.tree-directory-row > .tree-item {
+  flex: 1;
+  min-width: 0;
+}
+.tree-directory-toggle {
+  padding: 6px 2px;
+  border: 0;
+  background: none;
+  color: inherit;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+.entry-directory-badge {
+  font-size: var(--fs-meta);
+  color: var(--scope-accent);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+@media (max-height: 550px) {
+  .scope-header {
+    padding: 5px 9px;
+  }
+  .scope-parent {
+    padding: 3px 9px;
+    font-size: 10px;
+  }
+  .scope-parent small {
+    display: none;
+  }
+  .scope-location {
+    padding: 2px 9px;
+  }
+  .scope-header code {
+    font-size: 10px;
+  }
+  .scope-children {
+    max-height: 28px;
+    padding: 2px 8px;
+  }
+  .scope-crossing-toggle {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  .scope-pane > .canvas-wrap {
+    min-height: 60px;
+  }
+}
