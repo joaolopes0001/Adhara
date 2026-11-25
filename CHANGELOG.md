@@ -4,6 +4,7 @@ As mudanças visíveis do Agent Architecture Explorer, uma entrada por versão, 
 
 ## Não lançado
 
+- **README em inglês:** o README passou a ser todo em inglês, com uma seção sobre a rotina de higiene com a CLI (auditoria, gate, comparação, `freeze` e inventário). A instalação agora cita o `git` e o clone. A remoção encerra antes o servidor em segundo plano, conferindo o processo. A atualização e o aviso sobre `protected-paths.txt` também entraram. Os documentos de `docs/` continuam em português.
 - **Edição:** num sistema de arquivos que reaproveita na hora o número de um inode liberado, como o ext4, um temporário da edição apagado por outro programa e recriado com o mesmo nome antes da troca passava pelo temporário da gravação. A resposta dizia que nada tinha sido salvo, e a limpeza apagava o arquivo do outro programa. A gravação agora mantém o temporário aberto até o fim: a resposta é que o resultado não pôde ser confirmado, e o arquivo do outro programa fica.
 
 ## 1.0.0 — primeira versão pública
