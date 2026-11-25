@@ -70,6 +70,20 @@ Contribuições entram sob a mesma licença do projeto (MIT); não há CLA nem D
 - **Texto de interface:** a frase em inglês, com `t()`; `npm run i18n:check` sem item em (c); a tela nos dois idiomas (menu **Mais** › Português/English), sem `{parâmetro}` cru nem texto cortado.
 - **Edição:** sem a edição ligada no projeto aberto mais específico que contém o arquivo, nada grava, nem por outra janela nem com o estado adulterado; cada recusa termina conferindo que a árvore ficou idêntica (bytes, inode, modo, dono, grupo e horário de cada arquivo) e que não sobrou `.aae-edit-*`; o conflito por hash recusa; `unconfirmed` nunca vira “nada foi gravado”, e um sucesso descreve os bytes que estão no disco; uma gravação que espera a trava da pasta não segura as outras rotas; toda recusa da rota traz `code`; a CLI continua sem comando que grava. Os testes de edição (`tests/test_editing.py`, `tests/test_editing_http.py`) usam só temporários, com `HOME` falso: o caso do diretório pessoal nunca usa o real. Na interface, `tests/ui/editing-logic.spec.ts` cobre as regras puras e `tests/ui/edit-*.spec.ts` a tela, conferindo os bytes no disco; o que não dá para provocar (resposta perdida, erro do servidor, leitura lenta, nó sem hash) é simulado por interceptação e dito no teste, e `tests/ui/edit-server.spec.ts` para e reinicia de verdade um servidor próprio.
 
+## Commits
+
+Antes do commit, revise o diff e os arquivos staged e rode as verificações adequadas. A mensagem segue o [Conventional Commits](https://www.conventionalcommits.org/), em inglês:
+
+```text
+fix(editing): hold the temporary open until the save ends
+
+Why the change was made, or what the diff does not show.
+```
+
+- **Resumo:** `tipo(escopo): o que muda`, no imperativo, sem ponto final, com até 72 caracteres. Tipos: `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `style`, `ci`, `build`, `chore`, `revert`. O escopo é opcional e nomeia a área (`editing`, `scanner`, `readme`).
+- **Corpo:** opcional, separado do resumo por uma linha em branco. Diz só o que o diff não mostra: o motivo, a causa de um defeito, um efeito que não se vê no código. Não descreve o diff nem lista o que mudou.
+- **Tamanho:** mudança simples vai só com o resumo. Uma correção sutil pede um corpo mais longo, porque é ele que explica o código a quem o ler depois.
+
 ## Evidências e dados
 
 - Use diretórios temporários com conteúdo sintético. Não inclua credenciais, `.env`, estado pessoal, `workspace.json`, documentos privados, perfis de navegador, logs ou dependências.
@@ -86,9 +100,9 @@ python3 scripts/install.py
 
 O instalador grava fora do repositório (`~/.local/share/agent-architecture-explorer`, `~/.local/bin`, `~/.local/share/applications`), não altera configurações do desktop e preserva `state/` ao reinstalar. Depois de uma mudança de frontend, recarregue ou reabra a janela. Depois de uma mudança de backend, o servidor Python já em execução continua com os módulos antigos: identifique esse servidor (launcher, `server.json` na pasta `state` da instalação, processo real) antes de reiniciá-lo e não encerre navegadores ou servidores genéricos. `agent-architecture-explorer --print-url` localiza ou **inicia** a instância instalada; não é um comando só de inspeção.
 
-## Idioma e commits
+## Idioma
 
-A interface é escrita em **inglês**, direto no código. O **português** é um pacote opcional, `src/i18n/pt-BR.ts`, escolhido no menu **Mais** › Português/English e guardado por navegador em `localStorage['aae-lang']`, sem consultar o idioma do navegador; o que o pacote não tiver aparece em inglês. Todo o texto da interface e o que o servidor escreve para uma pessoa estão em inglês no código; `tests/ui/portuguese-source.spec.ts` (no código, sem navegador) e o percurso de `tests/ui/language.spec.ts` (na tela, num perfil novo) falham se o português voltar fora do pacote. A documentação continua em português nesta fase; mensagens de commit, identificadores, comentários e docstrings ficam em inglês. Antes de um commit, revise o diff e os arquivos staged, rode as verificações adequadas e use uma mensagem que descreva o resultado.
+A interface é escrita em **inglês**, direto no código. O **português** é um pacote opcional, `src/i18n/pt-BR.ts`, escolhido no menu **Mais** › Português/English e guardado por navegador em `localStorage['aae-lang']`, sem consultar o idioma do navegador; o que o pacote não tiver aparece em inglês. Todo o texto da interface e o que o servidor escreve para uma pessoa estão em inglês no código; `tests/ui/portuguese-source.spec.ts` (no código, sem navegador) e o percurso de `tests/ui/language.spec.ts` (na tela, num perfil novo) falham se o português voltar fora do pacote. A documentação continua em português nesta fase; mensagens de commit, identificadores, comentários e docstrings ficam em inglês.
 
 ### Texto de interface
 

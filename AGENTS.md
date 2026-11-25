@@ -77,4 +77,4 @@ Uma fonte por assunto: requisitos em SPECS; regras do leitor em `docs/modelo-e-l
 
 ## Commits
 
-Só quando pedido. Revise diff e arquivos staged, rode as verificações adequadas e escreva uma mensagem que descreva o resultado. Remotes e push também só a pedido.
+Só quando pedido. Antes de cada commit, leia a [seção Commits do CONTRIBUTING](CONTRIBUTING.md#commits): ela diz o que conferir e o formato da mensagem. Remotes e push também só a pedido.
