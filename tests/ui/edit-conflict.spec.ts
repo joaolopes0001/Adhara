@@ -468,7 +468,6 @@ test('edit conflict: after "Descartar meu texto", from the dialog of the save or
   page.on('pageerror', (error) => errors.push(error.message));
   const { root, file, cleanup } = await editing(page);
   try {
-    // Decidir depois, then Resolver… and Descartar meu texto.
     await retype(page, '# Notas\n\nUm, meu.\nDois.\nTrês.\n');
     appendFileSync(file, 'Quatro, de fora.\n');
     const disk = readFileSync(file, 'utf8');

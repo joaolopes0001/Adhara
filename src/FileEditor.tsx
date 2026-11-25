@@ -823,8 +823,8 @@ export function useEditing(context: EditingContext) {
           if (!current || current.busy || current.conflict || current.baseSha256 !== base) return;
           if (disk.sha256 === base) return;
           // Never in silence: with text typed, the conflict; with nothing typed, the version on disk is
-          // offered, and the editor keeps what it showed until then. The preview needs no `changed`: the
-          // new reading already loaded it again.
+          // offered, and the editor keeps what it showed until then. No `changed` here: the new reading
+          // reloads the preview.
           store.update(draft.path, { conflict: disk });
         })
         .catch(() => {
