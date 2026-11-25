@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import type { Page, Route } from '@playwright/test';
-import { readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { appendFileSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { selectFile } from './helpers';
 import {
@@ -15,7 +15,8 @@ import {
 // What a save does when the disk is not what the editor read: the conflict with both lists and three ways
 // out, the review that "Keep my text" makes mandatory, a conflict of metadata only, the outcome of an answer
 // that says nothing (checked by reading the file again), a file deleted, the second of two windows, and an
-// undo after another program changed the file. Real conflicts are made by writing the file from the test;
+// undo after another program changed the file; and the read-only text once the editor closes, which is the
+// version on disk the window last learned of. Real conflicts are made by writing the file from the test;
 // a lost or unclear answer of the server is simulated by intercepting the request (said in each test).
 const files = {
   'AGENTS.md': '# Projeto\n[Notas](notas.md)\n',
@@ -50,6 +51,29 @@ async function retype(page: Page, value: string) {
 }
 /** The conflict: the app's wide dialog, opened by a save that meets it or by "Resolver…". */
 const conflict = (page: Page) => page.getByRole('dialog', { name: 'O arquivo mudou no disco' });
+/** The read-only text of the File tab, as drawn (an empty line is drawn as a space). */
+const readOnly = (page: Page) =>
+  page
+    .locator('.inspector .source-code > [data-line] > code')
+    .evaluateAll((codes) =>
+      codes.map((code) => (code.textContent === ' ' ? '' : code.textContent)).join('\n'),
+    );
+async function closeEditor(page: Page) {
+  await page.getByRole('button', { name: 'Fechar editor', exact: true }).click();
+  await expect(page.locator('.file-editor')).toHaveCount(0);
+}
+/** What the File tab shows after another file is selected and this one again: the reference. */
+async function reselected(page: Page, file: string, root: string) {
+  await selectFile(page, join(root, 'AGENTS.md'));
+  await selectFile(page, file);
+  await expect(page.locator('.inspector .source-code')).toBeVisible();
+  return {
+    text: await readOnly(page),
+    lines: await page.locator('.inspector .file-lines').textContent(),
+  };
+}
+/** What the File tab says in place of the text: its error, or "Reading file…". */
+const fileTabNote = (page: Page) => page.locator('.inspector .panel-empty');
 /** The sentence of the conflict in the state line, and its long form in the tooltip. */
 async function saysConflict(page: Page) {
   await expect(outcome(page)).toContainText('Mudou no disco desde que você abriu');
@@ -432,6 +456,287 @@ test('edit conflict: after a reading, a draft whose file changed on disk says th
     ).toHaveText(['Mudou por fora.']);
     await expect(editorText(page, 'notas.md')).toHaveValue('# Notas\n\nAinda não gravado.\n');
     expect(readFileSync(file, 'utf8')).toBe('# Notas\n\nMudou por fora.\n');
+  } finally {
+    await cleanup();
+  }
+});
+
+test('edit conflict: after "Descartar meu texto", from the dialog of the save or later by Resolver…, closing the editor shows the file as it is on disk, with what the other program wrote', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  const { root, file, cleanup } = await editing(page);
+  try {
+    // Decidir depois, then Resolver… and Descartar meu texto.
+    await retype(page, '# Notas\n\nUm, meu.\nDois.\nTrês.\n');
+    appendFileSync(file, 'Quatro, de fora.\n');
+    const disk = readFileSync(file, 'utf8');
+    await page.getByRole('button', { name: 'Gravar', exact: true }).click();
+    await conflict(page).getByRole('button', { name: 'Decidir depois' }).click();
+    await expect(conflict(page)).toHaveCount(0);
+    await outcome(page).getByRole('button', { name: 'Resolver…' }).click();
+    await conflict(page).getByRole('button', { name: 'Descartar meu texto' }).click();
+    await expect(editorText(page, 'notas.md')).toHaveValue(disk);
+    await closeEditor(page);
+    await expect.poll(() => readOnly(page)).toBe(disk);
+    // The same as selecting another file and this one again; the line count is the reading's.
+    const lines = await page.locator('.inspector .file-lines').textContent();
+    expect(await reselected(page, file, root)).toEqual({ text: disk, lines });
+
+    // Descartar meu texto straight from the dialog of the save.
+    await startEditing(page, 'notas.md');
+    await retype(page, '# Notas\n\nOutra vez, meu.\n');
+    appendFileSync(file, 'Cinco, de fora.\n');
+    const again = readFileSync(file, 'utf8');
+    await page.getByRole('button', { name: 'Gravar', exact: true }).click();
+    await conflict(page).getByRole('button', { name: 'Descartar meu texto' }).click();
+    await expect(editorText(page, 'notas.md')).toHaveValue(again);
+    await closeEditor(page);
+    await expect.poll(() => readOnly(page)).toBe(again);
+    expect(readFileSync(file, 'utf8')).toBe(again);
+    expect(errors).toEqual([]);
+  } finally {
+    await cleanup();
+  }
+});
+
+test('edit conflict: after "Manter meu texto", or with the conflict left for later, closing the editor shows the version on disk, neither the one from before nor the unsaved text', async ({
+  page,
+}) => {
+  const { root, file, cleanup } = await editing(page);
+  try {
+    const mine = '# Notas\n\nUm, meu.\nDois.\nTrês.\n';
+    await retype(page, mine);
+    appendFileSync(file, 'Quatro, de fora.\n');
+    const disk = readFileSync(file, 'utf8');
+    await page.getByRole('button', { name: 'Gravar', exact: true }).click();
+    await conflict(page).getByRole('button', { name: 'Manter meu texto' }).click();
+    await closeEditor(page);
+    await expect.poll(() => readOnly(page)).toBe(disk);
+    // The text kept is still unsaved, and Editar opens it as it was.
+    await expect(page.locator('.status-bar [data-key="editing"]')).toHaveText(
+      'Edição ligada: projeto · 1 não gravado',
+    );
+    await startEditing(page, 'notas.md');
+    await expect(editorText(page, 'notas.md')).toHaveValue(mine);
+
+    // The disk changes again: the save after Manter meu texto finds it, and it is left for later.
+    appendFileSync(file, 'Cinco, de fora.\n');
+    const again = readFileSync(file, 'utf8');
+    await page.getByRole('button', { name: 'Gravar', exact: true }).click();
+    await conflict(page).getByRole('button', { name: 'Decidir depois' }).click();
+    await saysConflict(page);
+    await closeEditor(page);
+    await expect.poll(() => readOnly(page)).toBe(again);
+    expect((await reselected(page, file, root)).text).toBe(again);
+    expect(readFileSync(file, 'utf8')).toBe(again);
+  } finally {
+    await cleanup();
+  }
+});
+
+test('edit conflict: Desfazer after "Descartar meu texto" gives the text back in the editor and closing shows the disk; a file deleted during a conflict is not created again and its text stays unsaved', async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  const { root, file, cleanup } = await editing(page);
+  try {
+    const mine = '# Notas\n\nUm, meu.\nDois.\nTrês.\n';
+    await retype(page, mine);
+    appendFileSync(file, 'Quatro, de fora.\n');
+    const disk = readFileSync(file, 'utf8');
+    await page.getByRole('button', { name: 'Gravar', exact: true }).click();
+    await conflict(page).getByRole('button', { name: 'Descartar meu texto' }).click();
+    await expect(outcome(page)).toContainText('Seu texto foi descartado');
+    await outcome(page).getByRole('button', { name: 'Desfazer' }).click();
+    await expect(editorText(page, 'notas.md')).toHaveValue(mine);
+    await closeEditor(page);
+    await expect.poll(() => readOnly(page)).toBe(disk);
+
+    // Deleted while the conflict is open: Manter meu texto, and the save after its review says so.
+    await startEditing(page, 'notas.md');
+    appendFileSync(file, 'Cinco, de fora.\n');
+    await page.getByRole('button', { name: 'Gravar', exact: true }).click();
+    await expect(conflict(page)).toBeVisible();
+    rmSync(file);
+    await conflict(page).getByRole('button', { name: 'Manter meu texto' }).click();
+    await page.getByRole('button', { name: 'Gravar', exact: true }).click();
+    await page
+      .getByRole('dialog', { name: 'Gravar sobre a versão do disco?' })
+      .getByRole('button', { name: 'Confirmar gravação' })
+      .click();
+    await expect(outcome(page)).toContainText('O arquivo não existe mais');
+    await expect(editorText(page, 'notas.md')).toHaveValue(mine);
+    await closeEditor(page);
+    // The File tab says the file is gone, as selecting it again does, never its last text.
+    await expect(fileTabNote(page)).toHaveText('O caminho informado não existe.');
+    await expect(page.locator('.inspector .source-code')).toHaveCount(0);
+    await selectFile(page, join(root, 'AGENTS.md'));
+    await selectFile(page, file);
+    await expect(fileTabNote(page)).toHaveText('O caminho informado não existe.');
+    await expect(page.locator('.status-bar [data-key="editing"]')).toHaveText(
+      'Edição ligada: projeto · 1 não gravado',
+    );
+    expect(() => readFileSync(file)).toThrow();
+    expect(errors).toEqual([]);
+  } finally {
+    await cleanup();
+  }
+});
+
+test('edit: the editor opened after another program changed the file, also back to the text of the reading, and closed with nothing typed, leaves the read-only text as the editor read it', async ({
+  page,
+}) => {
+  const root = editProject(files);
+  const file = join(root, 'notas.md');
+  const cleanup = await openForEditing(page, root);
+  try {
+    await enableEditing(page, root);
+    await page.reload();
+    await selectFile(page, file);
+    await expect.poll(() => readOnly(page)).toBe(files['notas.md']);
+    // Another program writes the file, and nothing reads the projects again.
+    appendFileSync(file, 'Quatro, de fora.\n');
+    const disk = readFileSync(file, 'utf8');
+    await startEditing(page, 'notas.md');
+    await expect(editorText(page, 'notas.md')).toHaveValue(disk);
+    await closeEditor(page);
+    await expect.poll(() => readOnly(page)).toBe(disk);
+    expect(readFileSync(file, 'utf8')).toBe(disk);
+
+    // The File tab shows that version, and another program puts back the text of the reading (a
+    // checkout): the disk has the reading's hash again, not the text on the screen.
+    writeFileSync(file, files['notas.md']);
+    await startEditing(page, 'notas.md');
+    await expect(editorText(page, 'notas.md')).toHaveValue(files['notas.md']);
+    await closeEditor(page);
+    await expect.poll(() => readOnly(page)).toBe(files['notas.md']);
+    expect(readFileSync(file, 'utf8')).toBe(files['notas.md']);
+  } finally {
+    await cleanup();
+  }
+});
+
+test('edit: a save or a conflict of another document from the list of unsaved documents leaves the File tab of the file shown as it was, without reading it again', async ({
+  page,
+}) => {
+  const long =
+    '# Longo\n' + Array.from({ length: 300 }, (_, i) => `Linha ${i + 2}.`).join('\n') + '\n';
+  const root = editProject({ ...files, 'longo.md': long });
+  const file = join(root, 'notas.md');
+  const cleanup = await openForEditing(page, root);
+  const asked: string[] = [];
+  page.on('request', (request) => {
+    if (request.url().includes('/api/content?')) asked.push(decodeURIComponent(request.url()));
+  });
+  const scrollTop = () =>
+    page.evaluate(() => document.querySelector('.inspector-scroll')!.scrollTop);
+  /** A draft of notas.md left closed, and longo.md on the File tab, scrolled down. */
+  const draftAndScroll = async (text: string) => {
+    await selectFile(page, file);
+    await startEditing(page, 'notas.md');
+    await retype(page, text);
+    await closeEditor(page);
+    await selectFile(page, join(root, 'longo.md'));
+    await expect(page.locator('.inspector .source-code')).toBeVisible();
+    await page.evaluate(() => {
+      document.querySelector('.inspector-scroll')!.scrollTop = 2000;
+    });
+    await expect.poll(() => scrollTop()).toBe(2000);
+    asked.length = 0;
+  };
+  const saveFromList = async () => {
+    await page
+      .locator('.status-bar')
+      .getByRole('button', { name: 'Edição ligada: projeto · 1 não gravado' })
+      .click();
+    await page.getByRole('menuitem', { name: '1 documento não gravado' }).click();
+    await page
+      .getByRole('dialog', { name: 'Documentos não gravados' })
+      .locator('.pending-item')
+      .getByRole('button', { name: 'Gravar' })
+      .click();
+  };
+  try {
+    await enableEditing(page, root);
+    await page.reload();
+    // SIMULATED: a reading slower than 1 s, so the save below is not followed by one; a reading loads
+    // the File tab again by itself, and this test is about what the save does.
+    await page.route('**/api/refresh', async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1300));
+      await route.continue();
+    });
+    await Promise.all([
+      page.waitForResponse((response) => response.url().includes('/api/refresh')),
+      page.getByRole('button', { name: 'Reler diretórios' }).click(),
+    ]);
+    await page.unroute('**/api/refresh');
+
+    // A save of notas.md from the list.
+    await draftAndScroll('# Notas\n\nGravado pela lista.\n');
+    await saveFromList();
+    await expect(page.getByRole('dialog', { name: 'Documentos não gravados' })).toContainText(
+      'Nenhum documento não gravado.',
+    );
+    expect(readFileSync(file, 'utf8')).toBe('# Notas\n\nGravado pela lista.\n');
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.inspector .copy-path code')).toHaveText(join(root, 'longo.md'));
+    await page.waitForTimeout(500);
+    expect(asked).toEqual([]);
+    expect(await scrollTop()).toBe(2000);
+    await expect(page.locator('.inspector .source-code')).toContainText('Linha 300.');
+
+    // A conflict of notas.md from the list.
+    await draftAndScroll('# Notas\n\nMeu, pela lista.\n');
+    appendFileSync(file, 'Quatro, de fora.\n');
+    await saveFromList();
+    await expect(conflict(page)).toBeVisible();
+    await page.waitForTimeout(500);
+    await conflict(page).getByRole('button', { name: 'Decidir depois' }).click();
+    await page.keyboard.press('Escape');
+    await expect(page.locator('.inspector .copy-path code')).toHaveText(join(root, 'longo.md'));
+    expect(asked).toEqual([]);
+    expect(await scrollTop()).toBe(2000);
+    await expect(page.locator('.inspector .source-code')).toContainText('Linha 300.');
+    // notas.md, selected again, is read again: the version on disk.
+    await selectFile(page, file);
+    await expect.poll(() => readOnly(page)).toBe(readFileSync(file, 'utf8'));
+  } finally {
+    await page.unrouteAll({ behavior: 'ignoreErrors' });
+    await cleanup();
+  }
+});
+
+test('edit: Editar on a file another program deleted shows the refusal and, in place of the old text, what selecting the file again shows', async ({
+  page,
+}) => {
+  const root = editProject(files);
+  const file = join(root, 'notas.md');
+  const cleanup = await openForEditing(page, root);
+  const refusal = page.locator('.inspector .edit-note');
+  try {
+    await enableEditing(page, root);
+    await page.reload();
+    await selectFile(page, file);
+    await expect.poll(() => readOnly(page)).toBe(files['notas.md']);
+    // Another program deletes the file, and nothing reads the projects again.
+    rmSync(file);
+    await page.locator('.inspector .edit-button').click();
+    await expect(refusal).toHaveText(
+      'O arquivo, ou uma pasta do caminho, não existe mais no disco.',
+    );
+    await expect(fileTabNote(page)).toHaveText('O caminho informado não existe.');
+    await expect(page.locator('.inspector .source-code')).toHaveCount(0);
+    await expect(page.locator('.file-editor')).toHaveCount(0);
+    await selectFile(page, join(root, 'AGENTS.md'));
+    await selectFile(page, file);
+    await expect(refusal).toHaveText(
+      'O arquivo, ou uma pasta do caminho, não existe mais no disco.',
+    );
+    await expect(fileTabNote(page)).toHaveText('O caminho informado não existe.');
+    expect(() => readFileSync(file)).toThrow();
   } finally {
     await cleanup();
   }

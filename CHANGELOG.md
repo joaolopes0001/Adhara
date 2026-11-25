@@ -4,6 +4,7 @@ As mudanças visíveis do Agent Architecture Explorer, uma entrada por versão, 
 
 ## Não lançado
 
+- **Edição:** fechar o editor depois de um conflito, de abri-lo num arquivo que outro programa tinha mudado ou de uma gravação recusada porque o arquivo foi apagado mostrava na aba Arquivo um texto que não estava mais no disco, até outro arquivo ser selecionado. A aba agora mostra a versão do disco que a janela leu por último, ou que o arquivo não existe mais.
 - **CI:** um push ou pull request que só muda o `README.md` ou o `CHANGELOG.md` não roda mais as verificações, que levam uns 20 minutos por causa da suíte de interface.
 - **README em inglês:** o README passou a ser todo em inglês, com uma seção sobre a rotina de higiene com a CLI (auditoria, gate, comparação, `freeze` e inventário). A instalação agora cita o `git` e o clone. A remoção encerra antes o servidor em segundo plano, conferindo o processo. A atualização e o aviso sobre `protected-paths.txt` também entraram. Os documentos de `docs/` continuam em português.
 - **Edição:** num sistema de arquivos que reaproveita na hora o número de um inode liberado, como o ext4, um temporário da edição apagado por outro programa e recriado com o mesmo nome antes da troca passava pelo temporário da gravação. A resposta dizia que nada tinha sido salvo, e a limpeza apagava o arquivo do outro programa. A gravação agora mantém o temporário aberto até o fim: a resposta é que o resultado não pôde ser confirmado, e o arquivo do outro programa fica.

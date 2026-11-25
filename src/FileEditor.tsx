@@ -201,7 +201,10 @@ export type EditingContext = {
   /** How many readings of the disk this window has asked for; and which one gave a model, if any. */
   readingsAsked: () => number;
   readingOf: (model: Model) => number | undefined;
-  /** A save changed the file on disk: the read-only preview loads it again. */
+  /**
+   * The window learned what is on disk for `path`, which the read-only preview may not show (a save, a
+   * conflict, a file gone, an editor opened): the preview loads the file again if it is the one shown.
+   */
   changed: (path: string) => void;
   /** Shows a file of the reading in the inspector, on the File tab. */
   reveal: (path: string) => void;
@@ -333,12 +336,20 @@ export function useEditing(context: EditingContext) {
         undo: same ? existing.undo : undefined,
         outcome: same ? existing.outcome : undefined,
       });
+      // The preview may be older than this text (another program wrote the file since), and nothing says
+      // which text it shows: it is read again while the editor hides it.
+      ctx.current.changed(disk.path);
     } catch (error) {
       const flow = flowOf(error);
       if (flow === 'not-granted') {
         void refreshEditing();
         setPermission({ root, path, after: 'read', refused: refusedOf(error, 'read') });
-      } else setRefusals((previous) => ({ ...previous, [path]: refusedOf(error, 'read') }));
+      } else {
+        setRefusals((previous) => ({ ...previous, [path]: refusedOf(error, 'read') }));
+        // A file gone is a disk the preview does not show; the other refusals leave its text as it is, and a
+        // reload would only blank it and scroll it to the top.
+        if (flow === 'missing') ctx.current.changed(path);
+      }
     }
   }
 
@@ -458,6 +469,20 @@ export function useEditing(context: EditingContext) {
     void follow(path);
   }
 
+  /**
+   * A save or its review met another version on disk: the conflict dialog opens, and the preview is told,
+   * so that the read-only text after the editor is that version whatever the decision.
+   */
+  function conflictFound(path: string, disk: Known, change: Partial<Draft> = {}) {
+    store.update(path, { conflict: disk, resolving: true, ...change });
+    ctx.current.changed(path);
+  }
+  /** The file is no longer on disk: the preview says so, as selecting the file again would. */
+  function missing(path: string, change: Partial<Draft> = {}) {
+    store.update(path, { ...change, outcome: { kind: 'missing' } });
+    ctx.current.changed(path);
+  }
+
   /** The answer said nothing: read the disk and tell what is there, never a failure without looking. */
   async function settle(path: string, intended: string, mode: Mode) {
     const draft = store.get(path);
@@ -468,11 +493,8 @@ export function useEditing(context: EditingContext) {
     try {
       disk = await editRead(path);
     } catch (error) {
-      store.update(path, {
-        busy: undefined,
-        outcome:
-          flowOf(error) === 'missing' ? { kind: 'missing' } : { kind: 'no-answer', intended, mode },
-      });
+      if (flowOf(error) === 'missing') missing(path, { busy: undefined });
+      else store.update(path, { busy: undefined, outcome: { kind: 'no-answer', intended, mode } });
       return;
     }
     store.update(path, { busy: undefined });
@@ -487,8 +509,7 @@ export function useEditing(context: EditingContext) {
         true,
       );
     else if (verdict === 'not-saved') store.update(path, { outcome: { kind: 'not-saved' } });
-    // A save met the conflict: its dialog opens.
-    else store.update(path, { conflict: disk, resolving: true });
+    else conflictFound(path, disk);
   }
 
   /** One save (or undo) of a document at a time; a conflict of metadata only is tried once more. */
@@ -517,15 +538,14 @@ export function useEditing(context: EditingContext) {
         }
         if (!disk)
           store.update(path, { outcome: { kind: 'message', refused: refusedOf(error, 'save') } });
-        else if (disk.sha256 !== base.sha256)
-          store.update(path, { conflict: disk, resolving: true });
+        else if (disk.sha256 !== base.sha256) conflictFound(path, disk);
         else if (!retried) {
           // Only the metadata changed while saving (a chmod, a touch): the same save once more.
           store.update(path, { busy: 'saving' });
           await write(path, intended, mode, true);
         } else store.update(path, { outcome: { kind: 'metadata' } });
       } else if (flow === 'unknown') await settle(path, intended, mode);
-      else if (flow === 'missing') store.update(path, { outcome: { kind: 'missing' } });
+      else if (flow === 'missing') missing(path);
       else if (flow === 'not-granted') {
         // What is known: the snapshot says whether the folder of the project is still at its path.
         const snapshot = await refreshEditing();
@@ -580,13 +600,12 @@ export function useEditing(context: EditingContext) {
     try {
       disk = await editRead(path);
     } catch (error) {
-      store.update(path, {
-        busy: undefined,
-        outcome:
-          flowOf(error) === 'missing'
-            ? { kind: 'missing' }
-            : { kind: 'message', refused: refusedOf(error, 'read') },
-      });
+      if (flowOf(error) === 'missing') missing(path, { busy: undefined });
+      else
+        store.update(path, {
+          busy: undefined,
+          outcome: { kind: 'message', refused: refusedOf(error, 'read') },
+        });
       return;
     }
     store.update(path, { busy: undefined });
@@ -595,7 +614,7 @@ export function useEditing(context: EditingContext) {
     if (current.dirty) return; // Typed while the disk was read: the next Save saves it.
     if (disk.sha256 === current.baseSha256)
       store.update(path, { nothing: true, review: false, reviewing: false });
-    else store.update(path, { conflict: disk, resolving: true, review: false, reviewing: false });
+    else conflictFound(path, disk, { review: false, reviewing: false });
   }
   /**
    * The review compares with the disk of now: if the disk changed again since the conflict, that is a new
@@ -614,8 +633,7 @@ export function useEditing(context: EditingContext) {
     store.update(path, { busy: undefined });
     const current = store.get(path);
     if (!current) return;
-    if (disk && disk.sha256 !== current.baseSha256)
-      store.update(path, { conflict: disk, resolving: true });
+    if (disk && disk.sha256 !== current.baseSha256) conflictFound(path, disk);
     else store.update(path, { reviewing: true });
   }
   /** Undo: with text typed after the save, a dialog asks first, because the draft is replaced. */
@@ -805,7 +823,8 @@ export function useEditing(context: EditingContext) {
           if (!current || current.busy || current.conflict || current.baseSha256 !== base) return;
           if (disk.sha256 === base) return;
           // Never in silence: with text typed, the conflict; with nothing typed, the version on disk is
-          // offered, and the editor keeps what it showed until then.
+          // offered, and the editor keeps what it showed until then. The preview needs no `changed`: the
+          // new reading already loaded it again.
           store.update(draft.path, { conflict: disk });
         })
         .catch(() => {

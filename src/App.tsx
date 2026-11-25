@@ -768,7 +768,10 @@ export default function App() {
     lastReading: () => lastReading.current,
     readingsAsked: () => readingsAsked.current,
     readingOf: (of) => readingOf.current.get(of),
-    changed: () => setContentVersion((version) => version + 1),
+    // Another file is read when it is selected; reading it now would reload the one shown, at the top.
+    changed: (path) => {
+      if (path === sourcePath) setContentVersion((version) => version + 1);
+    },
     reveal: (path) => {
       select(path);
       setInspectorTab('source');
