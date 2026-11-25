@@ -2,7 +2,13 @@ name: Verificações
 
 on:
   push:
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
   pull_request:
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md
 
 permissions:
   contents: read
